@@ -1,5 +1,7 @@
 # Simulate Data Using `simstudy`
-# Package required: install.packages(c("simstudy", "data.table", "tidyverse", "readr"))
+# Package required: 
+# install.packages("simstudy")
+# install.packages("data.table")
 
 # RC-RAGE behavioral dataset are simulated based on previous RC-RAGE study
 # The current simulated dataset matching observed distributions from the reference dataset
@@ -105,24 +107,28 @@ rc_rage_def <- defData(rc_rage_def, varname = "killRate_1or2", dist = "beta",
                        formula = 6 / (6 + 1), 
                        variance = (6 * 1) / ((6 + 1)^2 * (6 + 1 + 1)))
 
-# Convert Beta(2,5) to mean and variance
+# Convert Beta(4,2) to mean and variance
 # Moderate skew
 rc_rage_def <- defData(rc_rage_def, varname = "killRate_3or4", dist = "beta",
-                       formula = 2 / (2 + 5), 
-                       variance = (2 * 5) / ((2 + 5)^2 * (2 + 5 + 1)))
+                       formula  = 6 / (6 + 4),  
+                       variance = (6 * 4) / ((6 + 4)^2 * (6 + 4 + 1)))
 
-# Convert Beta(1.5,8) to mean and variance
+# Convert Beta(3,4) to mean and variance
 # More zeros
 rc_rage_def <- defData(rc_rage_def, varname = "killRate_6or7", dist = "beta",
-                       formula = 1.5 / (1.5 + 8), 
-                       variance = (1.5 * 8) / ((1.5 + 8)^2 * (1.5 + 8 + 1)))
+                       formula = 3 / (3 + 4), 
+                       variance = (3 * 4) / ((3 + 4)^2 * (3 + 4 + 1)))
 
 # Generate initial dataset (150 total rows: 50 ID × 3 sessions)
 rc_rage_data <- genData(n_participants * n_sessions, rc_rage_def)
 setDT(rc_rage_data) # Ensure it's a data.table
 
+# remove the simstudy "id" column:
+rc_rage_data[, id := NULL]
+
 # Enforce Click Count Range
 rc_rage_data[, clickCnt := pmax(194, pmin(clickCnt, 579))] 
+rc_rage_data[, clickCnt := as.integer(round(clickCnt))]  # integer
 
 # Ensure Kill Count is Whole Number (Poisson Output is Non-Negative)
 rc_rage_data[, killCnt := pmax(0, floor(killCnt))] 
@@ -139,25 +145,26 @@ rc_rage_data <- merge(
 )
 
 # Adjust for Heat Stress Effects (Only for HOT condition)
-# killRate_3or4 increased by 5% for HOT conditions
-# killRate_6or7 increased by 2% for HOT conditions
+# killRate_3or4 increased by 2% for HOT conditions
+# killRate_6or7 increased by 1% for HOT conditions
 # To ensure values remain in valid beta-distributed range (0,1), use logit Transformation 
 # This preserves the original distribution while ensuring HOT leads to slightly more aggressive choices in a non-artificial way
-# Logit Transform Function (to Ensure Values Stay Within [0,1])
+
+# Define Logit Transform Function (to Ensure Values Stay Within [0,1])
 logit_transform <- function(x, shift) {
-  # shift is how much to shift in logit space
-  pmax(0, pmin(plogis(qlogis(x) + shift), 1))
+  # shift in logit space; clamp final [0,1]
+  pmax(0, pmin(1, plogis(qlogis(x) + shift)))
 }
 
 # Adjust Behavior for HOT Condition (Increased Aggression)
 rc_rage_data[, killRate_3or4 := ifelse(
   temperature_condition == "HOT", 
-  logit_transform(killRate_3or4, 0.05), killRate_3or4
+  logit_transform(killRate_3or4, 0.03), killRate_3or4
 )]
 
 rc_rage_data[, killRate_6or7 := ifelse(
   temperature_condition == "HOT", 
-  logit_transform(killRate_6or7, 0.02), 
+  logit_transform(killRate_6or7, 0.08), 
   killRate_6or7
 )]
 
