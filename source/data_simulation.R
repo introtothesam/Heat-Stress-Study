@@ -113,11 +113,11 @@ rc_rage_def <- defData(rc_rage_def, varname = "killRate_3or4", dist = "beta",
                        formula  = 6 / (6 + 4),  
                        variance = (6 * 4) / ((6 + 4)^2 * (6 + 4 + 1)))
 
-# Convert Beta(3,4) to mean and variance
+# Convert Beta(1,4) to mean and variance
 # More zeros
 rc_rage_def <- defData(rc_rage_def, varname = "killRate_6or7", dist = "beta",
-                       formula = 3 / (3 + 4), 
-                       variance = (3 * 4) / ((3 + 4)^2 * (3 + 4 + 1)))
+                       formula = 2 / (2 + 6), 
+                       variance = (2 * 6) / ((2 + 6)^2 * (2 + 6 + 1)))
 
 # Generate initial dataset (150 total rows: 50 ID × 3 sessions)
 rc_rage_data <- genData(n_participants * n_sessions, rc_rage_def)
@@ -159,12 +159,20 @@ logit_transform <- function(x, shift) {
 # Adjust Behavior for HOT Condition (Increased Aggression)
 rc_rage_data[, killRate_3or4 := ifelse(
   temperature_condition == "HOT", 
-  logit_transform(killRate_3or4, 0.03), killRate_3or4
+  logit_transform(killRate_3or4, 0.02), killRate_3or4
 )]
 
 rc_rage_data[, killRate_6or7 := ifelse(
   temperature_condition == "HOT", 
-  logit_transform(killRate_6or7, 0.08), 
+  logit_transform(killRate_6or7, 0.50), 
+  killRate_6or7
+)]
+
+# Ensure HOT has more 1’s
+set.seed(1234)
+rc_rage_data[, killRate_6or7 := ifelse(
+  temperature_condition == "HOT" & runif(.N) < 0.3,  # 30% probability to set to 1
+  1, 
   killRate_6or7
 )]
 
