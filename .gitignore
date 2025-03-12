@@ -48,5 +48,9 @@ po/*~
 # RStudio Connect folder
 rsconnect/
 
-# Ignore local files (raw data)
+# Ignore local files (reference data)
 localonly/
+
+# Ignore apaquarto extension (avoid reinstalling)
+_extensions/
+
