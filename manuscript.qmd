@@ -1,0 +1,524 @@
+---
+title: "The Impact of Heat Stress on Reactive Aggression: Exploring the Roles of Impulsivity, Trait Aggression, and Internal State"
+shorttitle: "Heat Stress and Aggression"
+author:
+  - name: "Chenyi Dai"
+    corresponding: true
+    email: "cydai@uchicago.edu"
+    affiliations:
+      - name: "University of Chicago"
+        department: "Department of Psychology"
+        city: "Chicago"
+        region: "IL"
+        postal-code: "60637"
+abstract: "This study investigates the effects of heat stress on reactive aggression, examining potential mediators (negative affect, anger) and moderators (impulsivity, trait aggression). Using simulated data, we apply mediation and moderation analyses to explore these relationships."
+keywords: [Heat stress, Aggression, Impulsivity, Retaliation, Mediation, Moderation]
+bibliography: references.bib
+format:
+  apaquarto-pdf: default
+execute:
+  echo: false
+  warning: false
+  cache: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+# Load all packages
+library(tidyverse)   # Data wrangling & visualization (includes ggplot2, dplyr, tidyr, readr)
+library(ggpubr)      # APA-styled plots
+# install.packages("ggpubr")
+library(lme4)        # Mixed-effects modeling
+library(broom.mixed) # Model output formatting
+library(mediation)   # Mediation analysis
+# install.packages("mediation")
+library(apaTables)   # APA formatting tables
+library(knitr)       # Markdown table formatting
+library(kableExtra)  # Format tables
+library(papaja)      # Theme apa    
+library(simstudy)    # Simulating data for behavioral datasets
+# install.packages("simstudy")
+library(data.table)  # Efficient data manipulation
+# install.packages("data.table")
+
+# Set a seed for reproducibility
+set.seed(1234)
+```
+
+```{r}
+#| label: simulate-data
+#| include: false
+
+# Run data simulation script to generate raw datasets 
+source("source/data_simulation.R") # Generates simulated data 
+```
+
+```{r}
+#| label: transform-data
+#| include: false
+
+# Run data transformation script to preprocess and clean data
+source("source/data_transformation.R")  
+```
+
+```{r}
+#| label: load-processed-data
+#| include: false
+
+# Load processed datasets (final transformed data)
+heat_stress_data <- read_csv("data/heat_stress_data.csv")
+heat_stress_ctrl <- read_csv("data/heat_stress_ctrl.csv")
+heat_stress_mid <- read_csv("data/heat_stress_mid.csv")
+heat_stress_hot <- read_csv("data/heat_stress_hot.csv")
+
+# Check dataset structure
+glimpse(heat_stress_data)
+```
+
+## Introduction {#sec-introduction}
+
+The physiological mechanisms that discovered the effects of thermal exposure on human core and skin temperatures were fully explained by previous literature, with extensive research highlighting how heat influences psychological and behavioral outcomes. Thermal stress impacts cognition (Hancock & Vasmatzidis, 2003), neurotransmitter activity involving norepinephrine, dopamine, and serotonin (Lõhmus, 2018), stress hormone levels (Brenner et al., 1998), and emotional states (Escobar et al., 2021). Understanding these effects has taken on heightened importance in the context of global climate change and rising ambient temperatures. Elevated temperatures have been associated with increased substance use, violent crimes such as robbery and homicide (Tomassini et al., 2024; Thomas & Wolff, 2023), and higher suicide rates: studies suggest that a 1°C rise in air temperature correlates with an uptick in suicides (Kim et al., 2010; Burke et al., 2018). One established framework is the Heat Hypothesis, proposed by Anderson (2001), which posits that high temperatures elevate aggressive motivation and the likelihood of aggressive behavior. For instance, improved climate control in institutional settings (e.g., prisons, schools, and the workplace) has been recommended as a potential strategy to mitigate aggression (Anderson, 2001). Additionally, heat stress significantly impacts occupational health and safety. High temperatures pose physical health risks and impair cognitive performance, especially in hot work environments (Srinivasan et al., 2024). Workplaces involving complex tasks are particularly vulnerable to heat-induced declines in productivity and decision-making accuracy (Spector et al., 2019). These findings underscore the importance of investigating the relationship between heat stress and behavioral and psychological dysregulation, as this can inform strategies to address mental health challenges and mitigate aggression-related issues in occupational, social, and institutional contexts. This study specifically examines the effects of heat stress on aggression, exploring potential mediating variables such as cognitive performance, emotional regulation, and individual differences to better understand the mechanisms driving this relationship. Investigating these dynamics aims to provide evidence-based insights that can guide the formulation of policies and interventions to enhance psychological resilience, reduce aggression, and improve overall quality of life in the face of challenges posed by global warming.
+Both observational and experimental studies demonstrate a significant relationship between heat stress and aggression. Observational research, such as a study examining aggression by assault death data from Seoul, found that the overall risk of death by assault increased by 1.4% for every 1°C rise in ambient temperature (Kim et al., 2023). Experimental findings complement these observations; for example, Baron and Bell (1976) found that high ambient temperatures raised behavioral aggression as participants delivered stronger electric shocks under heat conditions. Psychological theories like the Temperature-Aggression Hypothesis (Anderson et al., 2000) support this connection between heat and aggression. This theory posits that elevated temperatures increase aggressive motivation and, under conducive circumstances, lead to aggressive behavior. 
+Aggression can be categorized into two primary types: reactive aggression, characterized as impulsive and emotionally driven in response to provocation or frustration, and proactive aggression, which is calculated, goal-directed, and less tied to emotional states (Poulin & Boivin, 2000). The distinction is critical, as reactive aggression is often tied to situational factors like environmental stressors, whereas proactive aggression is primarily influenced by genetic and learned behaviors (Tuvblad et al., 2009; Bandura, 1973). Given its strong ties to emotional and environmental triggers, this study focuses specifically on reactive aggression taking heat stress as the input variable, employing the Retaliate or Carry-On: Reactive Aggression Experiment (RC-RAGE), developed by Meidenbauer et al. (2024), to investigate how rising temperatures influence impulsive, provocation-driven aggression under controlled experimental conditions.
+Meidenbauer et al. (2024) emphasized the need for tasks that elicit reactive aggression in experimental settings, especially among socially desirable individuals, as social desirability skews self-reported and behavioral aggression measures, a mismatch attributed to test content rather than a common desirability factor (Vigil-Colet et al., 2012). To address this, the RC-RAGE was developed to fill a methodological gap by offering a reactive aggression metric suitable for experimental settings, enabling immediate impulsive responses, imposing a tangible cost to retaliation, and minimizing the influence of social desirability biases. Findings demonstrated that costly, reactive aggression is significantly influenced by impulsivity, reflecting a tendency to act without planning. Building on the Temperature-Aggression Hypothesis (Anderson et al., 2000), which identifies cognitive (e.g., accessibility of aggressive thoughts), affective (e.g., heightened hostility or anger), and arousal (e.g., increased heart rate) pathways through which input variables influence aggression, and the General Aggression Model (DeWall et al., 2011), which highlights the interaction between individual differences (e.g., impulsivity) and environmental stressors (e.g., heat), this study incorporates several internal state variables—impulsivity trait, aggression trait, personality factors, cognitive flexibility, working memory, emotional clarity and attention, temperature perception, and substance consumption—as potential mediators to provide a comprehensive understanding of the heat-aggression process.
+To better understand the mechanisms linking heat exposure to aggression, the current within-subjects, crossover design experiment focuses on potential mediators such as cognitive flexibility, working memory, and subjective discomfort because of their established links to aggression and cognitive performance. For example, neuroticism and extraversion have direct positive effects on physical aggression (Cavalcanti & Pimentel, 2016), and neuroticism is associated with greater discomfort in response to environmental temperature (LeBlanc et al., 2003).T0(Kleider & Parrott, 2008). Previous research shows that heat stress impairs working memory, attention, response speed, and processing speed (Mazloumi et al., 2014). However, cognitive functions largely remain unaffected unless thermal stress significantly shifts core body temperature away from steady-state conditions (Hancock & Vasmatzidis, 2003). Interestingly, subjective discomfort from heat can impair cognitive flexibility even when core body temperature and cortical excitability are unaffected (Gaoua et al., 2012). To isolate the physiological effects of heat stress, this study will control heat exposure duration to ensure participants maintain steady-state core temperatures while monitoring subjective discomfort and skin temperature. 
+
+
+## Methods {#sec-methods}
+### Experimental Design
+
+Data will be collected through a three-part, on-site study consisting of three sessions held at the same time and on the same day of the week, spaced one week apart. During two sessions, the chamber will be set to elevated temperatures, while in the other session, it will be set to room temperature. Participants will sit in a controlled sauna environment, wearing a bioharness to monitor physiological indicators such as core body temperature, skin temperature, and heart rate variability. They will also complete cognitive tasks assessing working memory (Backward Digit Span task) and cognitive flexibility (Stop Signal Task), along with a novel task to evaluate reactive aggression (RC-RAGE task). Prior research has shown that heat stress may impair memory (Lee et al., 2015) and cognitive flexibility (Gaoua et al., 2012b). This study extends these findings by introducing a novel paradigm designed to assess provoked aggression in situations where self-control is required (Meidenbauer et al., 2023).  
+
+### Participants
+
+Participant recruitment will occur through the University of Chicago Research System, Facebook groups, and campus flyers, with eligibility determined via online pre-screening. Exclusion criteria include chronic health issues, non-normal vision, non-English speakers, age outside 18-35, and BMI over 35. The pre-screening survey includes the BIS-11 Impulsivity Questionnaire (Patton et al., 1995), BPAQ Aggression Questionnaire (Buss & Perry, 1992), Big Five Inventory–2 Short Form (BFI-2-S) (Soto & John, 2017), Clarity and Attention to Emotions Scale (Palmieri et al., 2009), Temperature Perceptions scale (Wang et al., 2020), and DFAQ-CU Inventory (Cuttler & Spradlin, 2017). These questionnaires assess participants' impulsivity, aggression, facet traits, emotional awareness, thermal comfort, and cannabis use to provide baseline measures for analyzing how individual differences in each trait may influence responses under heat stress. The questionnaire order was randomized through Qualtrics.
+
+### Procedure
+
+This study adheres to ethical guidelines approved by the University of Chicago Institutional Review Board (IRB 19-1977). Before the study, participants are instructed to refrain from consuming alcohol or using any drugs for 24 hours. Following the acquisition of informed consent, participants are instructed to place a bioharness strap with a heart rate monitor core body temperature sensor under a standardized heat suit. Participants are seated, and baseline physiological data are collected for 5 minutes. Participants are then instructed on the tasks they will complete in the chamber. Participants then enter the heat chamber where they have been randomly assigned to one of three temperature conditions: 97°F, 113°F, or room temperature for 50 minutes. Following a 5-minute heat chamber calibration, participants first complete the Backward Digit Span task (Wechsler, 1955), which assesses working memory by requiring them to recall a series of digits in reverse order. Participants are presented with a string of numbers, which they must repeat back in the opposite sequence. Next, participants complete the Stop Signal Task (Lappin & Eriksen, 1966), which evaluates their cognitive flexibility and response inhibition. They are shown a series of directional arrows and must quickly choose one of two options based on the arrow’s direction. After completing the cognitive tasks, participants are instructed to take a five-minute break, during which they are told that a researcher needs to check on the progress of another participant in a different room. This statement is intended to lead participants to believe they have been randomly assigned to the role of the "gatherer" in an upcoming game against another human player assigned to the role of the “robber”. The deception is crucial for maintaining the integrity of the measurement of reactive aggression. In the RC-RAGE task, participants spend 12 minutes maximizing their earnings by collecting "apples" toward a “harvest” of 10 apples (10 apples = 10 cents), while dealing with a "robber" who occasionally steals 5 cents. Participants can either retaliate by shooting (regaining 3 cents but resetting progress) or continue collecting while ignoring the robber. Retaliation costs vary based on progress: advantageous (retaliation at 1-2 clicks), modestly costly (retaliation at 3-4 clicks), or strongly costly (retaliation at 6-7 clicks). Participants are informed on the best strategy of retaliation to maximize gains. 
+
+### Statistical analysis
+
+```{r}
+#| label: calculate-negative-affect
+#| include: false
+# Calculate mean Negative Affect (PANASNA) across time points T0, T1, T2, T3
+# Calculate mean Positive Affect (PANASPA) across time points T0, T1, T2, T3
+heat_stress_data <- heat_stress_data %>%
+  mutate(
+    PANASNA_Mean = rowMeans(across(starts_with("PANASNA_T")), na.rm = TRUE),
+    PANASPA_Mean = rowMeans(across(starts_with("PANASPA_T")), na.rm = TRUE)
+  )
+```
+
+```{r}
+#| label: descriptive-numeric-stats
+#| include: false
+# Compute descriptive statistics
+descriptive_stats <- heat_stress_data %>%
+  summarize(
+    Mean_Costly_Retaliation = mean(ModestlyCostly + StronglyCostly, na.rm = TRUE),
+    SD_Costly_Retaliation = sd(ModestlyCostly + StronglyCostly, na.rm = TRUE),
+    Mean_PANASNA = mean(PANASNA_Mean, na.rm = TRUE),
+    SD_PANASNA = sd(PANASNA_Mean, na.rm = TRUE),
+    Mean_NovacoAnger = mean(NovacoAnger, na.rm = TRUE),
+    SD_NovacoAnger = sd(NovacoAnger, na.rm = TRUE),
+    Mean_Trait_Aggression = mean(BPAQTotal, na.rm = TRUE),
+    SD_Trait_Aggression = sd(BPAQTotal, na.rm = TRUE),
+    Mean_Trait_Impulsivity = mean(BISTotal, na.rm = TRUE),
+    SD_Trait_Impulsivity = sd(BISTotal, na.rm = TRUE)
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "Statistic", values_to = "Value") # Convert to long format for table
+```
+
+```{r}
+#| label: table-descriptive-stats
+#| echo: false
+# Create structured APA-style table
+heat_stress_data <- heat_stress_data %>%
+  mutate(CostlyRetaliation = ModestlyCostly + StronglyCostly)
+
+# Build a tibble of descriptive statistics
+descriptive_table <- tibble(
+  Variable = c(
+    "Costly Retaliation",
+    "Negative Affect (PANASNA)",
+    "Novaco Anger",
+    "Trait Aggression (BPAQ)",
+    "Trait Impulsivity (BIS)"
+  ),
+  Mean = c(
+    mean(heat_stress_data$CostlyRetaliation, na.rm = TRUE),
+    mean(heat_stress_data$PANASNA_Mean, na.rm = TRUE),
+    mean(heat_stress_data$NovacoAnger, na.rm = TRUE),
+    mean(heat_stress_data$BPAQTotal, na.rm = TRUE),
+    mean(heat_stress_data$BISTotal, na.rm = TRUE)
+  ),
+  SD = c(
+    sd(heat_stress_data$CostlyRetaliation, na.rm = TRUE),
+    sd(heat_stress_data$PANASNA_Mean, na.rm = TRUE),
+    sd(heat_stress_data$NovacoAnger, na.rm = TRUE),
+    sd(heat_stress_data$BPAQTotal, na.rm = TRUE),
+    sd(heat_stress_data$BISTotal, na.rm = TRUE)
+  )
+)
+
+# Format and print the table in APA-like style
+descriptive_table %>%
+  mutate(across(where(is.numeric), ~ round(., 2))) %>%  # Round numeric columns
+  kbl(
+    caption = "Table 1. Descriptive Statistics of Key Variables"
+  ) %>%
+  kable_classic(full_width = FALSE, html_font = "Times New Roman")
+```
+
+```{r}
+#| label: descriptive-non-numeric-stats
+#| echo: false
+# Summarize gender distribution
+gender_counts <- heat_stress_data %>%
+  distinct(ID, gender) %>%  # Count unique participants per gender
+  group_by(gender) %>%
+  summarize(
+    Count = n(),
+    Proportion = round(n() / n_distinct(heat_stress_data$ID), 2)  # Proportion of unique participants
+  ) %>%
+  ungroup()
+
+# Format and print in APA-like style
+gender_counts %>%
+  mutate(
+    Proportion = round(Proportion, 2)  # Round proportion to 2 decimals
+  ) %>%
+  kbl(
+    caption = "Table 2. Gender Distribution of Participants"
+  ) %>%
+  kable_classic(full_width = FALSE, html_font = "Times New Roman")
+```
+
+```{r}
+#| label: fig-costly-retaliation-facet
+#| fig-cap: "Figure 1. Retaliation Rates Across Temperature Conditions"
+#| echo: false
+
+# Ensure correct order for temperature conditions
+heat_stress_data <- heat_stress_data %>%
+  mutate(temperature_condition = factor(temperature_condition, levels = c("CTRL", "MID", "HOT")))
+
+# Convert data to long format for faceting
+heat_stress_long <- heat_stress_data %>%
+  pivot_longer(cols = c(Advantages, ModestlyCostly, StronglyCostly), 
+               names_to = "Retaliation_Type", 
+               values_to = "Retaliation_Rate")
+
+# Plot with facet wrap
+ggplot(heat_stress_long, aes(x = temperature_condition, y = Retaliation_Rate, fill = temperature_condition)) +
+  stat_summary(fun = mean, geom = "bar", position = position_dodge(), alpha = 0.7) +
+  stat_summary(fun.data = mean_cl_boot, geom = "errorbar", width = 0.2, position = position_dodge(0.9)) +
+  facet_wrap(~Retaliation_Type, labeller = labeller(Retaliation_Type = c(
+    "ModestlyCostly" = "Modestly Costly",
+    "StronglyCostly" = "Strongly Costly"
+  ))) + 
+  labs(title = "Retaliation Rates Across Temperature Conditions",
+       x = "Temperature Condition",
+       y = "Retaliation Rate") +
+  scale_fill_discrete(name = "Temperature Condition") + 
+  theme_apa() +
+  theme(
+    strip.text = element_text(size = 5.5),  # Improve facet labels visibility
+    axis.text.x = element_text(size = 8),  # Make x-axis labels more readable
+    axis.title = element_text(size = 14)  # Improve axis title size
+  )
+```
+
+```{r}
+#| label: anova-costly-retaliation
+#| include: false
+# Main Effect: Does heat stress increase costly retaliation?
+
+# Compute One-Way ANOVAs separately
+anova_modestly <- aov(ModestlyCostly ~ temperature_condition, data = heat_stress_data)
+anova_strongly <- aov(StronglyCostly ~ temperature_condition, data = heat_stress_data)
+
+summary(anova_modestly)
+summary(anova_strongly)
+```
+
+```{r}
+#| label: anova-modestly-table
+#| echo: false
+# Tidy the ANOVA result for Modestly Costly Retaliation
+anova_modestly_tidy <- tidy(anova_modestly) %>%
+  rename(
+    Source = term,
+    df = df,
+    `Sum of Squares` = sumsq,
+    `Mean Square` = meansq,
+    F = statistic,
+    p = p.value
+  ) %>%
+  mutate(
+    across(where(is.numeric), ~ round(., 3)),  # Round to 3 decimals
+    Source = ifelse(Source == "Residuals", "Error", Source),
+    F = ifelse(is.na(F), "--", as.character(F)),  # Replace NA with "--"
+    p = ifelse(is.na(p), "--", as.character(p))
+  )
+
+# Format and print the table in APA style
+anova_modestly_tidy %>%
+  kbl(
+    caption = "Table 3. One-Way ANOVA for Modestly Costly Retaliation",
+    booktabs = TRUE
+  ) %>%
+  kable_classic(full_width = FALSE, html_font = "Times New Roman")
+```
+
+```{r}
+#| label: anova-strongly-table
+#| echo: false
+# Tidy the ANOVA result for Strongly Costly Retaliation
+anova_strongly_tidy <- tidy(anova_strongly) %>%
+  rename(
+    Source = term,
+    df = df,
+    `Sum of Squares` = sumsq,
+    `Mean Square` = meansq,
+    F = statistic,
+    p = p.value
+  ) %>%
+  mutate(
+    across(where(is.numeric), ~ round(., 3)),  # Round to 3 decimals
+    Source = ifelse(Source == "Residuals", "Error", Source),
+    F = ifelse(is.na(F), "--", as.character(F)),  # Replace NA with "--"
+    p = ifelse(is.na(p), "--", as.character(p))
+  )
+
+# Format and print the table in APA style
+anova_strongly_tidy %>%
+  kbl(
+    caption = "Table 4. One-Way ANOVA for Strongly Costly Retaliation",
+    booktabs = TRUE
+  ) %>%
+  kable_classic(full_width = FALSE, html_font = "Times New Roman") %>%
+  kable_styling(latex_options = c("longtable", "scale_down")) %>%
+  footnote(
+    general = "Note. Df = degrees of freedom; SS = sum of squares; MS = mean square. F and p are not computed for the Error row.",
+    general_title = ""
+  )
+```
+
+Temperature condition does not affect modestly costly retaliation.
+p = 0.00136 (< 0.01) → Statistically significant
+F = 6.905 → The effect size is moderate to strong.
+Conclusion: Temperature condition significantly affects Strongly Costly Retaliation.
+Tukey HSD Results for Strongly Costly Retaliation:
+HOT vs. CTRL: p = 0.0056 → HOT has significantly more costly retaliation than CTRL.
+HOT vs. MID: p = 0.0037 → HOT has significantly more costly retaliation than MID.
+MID vs. CTRL: p = 0.9907 → No significant difference.
+
+```{r}
+#| label: logistic-mixed-model
+#| include: false
+# Prediction of Retaliation Type: Does temperature condition influence retaliation choice?
+
+# Fit a multinomial logistic regression using mixed-effects
+# Outcome varibale: StrongCostly 
+# Predictors: 
+# temperature_condition (categorical: CTRL, MID, HOT)
+# BISTotal (impulsivity trait measure)
+# BPAQTotal (aggression trait measure)
+# Random Effect: (1 | ID), accounting for repeated measures within participants
+logit_model <- glmer(StronglyCostly ~ temperature_condition + BISTotal + BPAQTotal + (1 | ID), 
+                             data = heat_stress_data, 
+                             family = binomial, 
+                             control = glmerControl(optimizer = "bobyqa"), 
+                             nAGQ = 10)  # Improves numerical accuracy
+
+summary(logit_model)
+```
+
+```{r}
+#| label: tidy-logit-model
+#| echo: false
+logit_results <- tidy(logit_model, conf.int = TRUE)
+```
+
+```{r}
+#| label: clean-logit-results
+#| include: false
+# Isolate only the fixed effects and rename columns for clarity
+logit_results_cleaned <- logit_results %>%
+  dplyr::filter(effect == "fixed") %>%  # Keep only fixed effects
+  dplyr::select(term, estimate, std.error, conf.low, conf.high, statistic, p.value) %>%
+  dplyr::rename(
+    Predictor = term, 
+    B = estimate, 
+    Std_Error = std.error, 
+    CI_Lower = conf.low, 
+    CI_Upper = conf.high, 
+    z_value = statistic, 
+    p_value = p.value
+  )
+```
+
+```{r}
+#| label: relabel-predictors
+#| include: false
+# Give more meaningful names to the predictors (Intercept, Temperature, BIS, BPAQ, etc.)
+logit_results_named <- logit_results_cleaned %>%
+  mutate(
+    Predictor = case_when(
+      Predictor == "(Intercept)" ~ "Intercept",
+      Predictor == "temperature_conditionMID" ~ "Temperature (MID vs. CTRL)",
+      Predictor == "temperature_conditionHOT" ~ "Temperature (HOT vs. CTRL)",
+      Predictor == "BISTotal" ~ "Trait Impulsivity (BIS)",
+      Predictor == "BPAQTotal" ~ "Trait Aggression (BPAQ)",
+      TRUE ~ Predictor  # Fallback for any unexpected variable names
+    )
+  )
+```
+
+
+```{r}
+#| label: apa-logit-table
+#| echo: false
+# Build and format the table
+logit_results_named %>%
+  # Round numeric columns to 3 decimals
+  mutate(across(where(is.numeric), ~ round(., 3))) %>%
+  # Combine CI columns, format p-values
+  mutate(
+    CI = paste0("[", CI_Lower, ", ", CI_Upper, "]"),
+    p_value = ifelse(p_value < 0.001, "< .001", as.character(round(p_value, 3)))
+  ) %>%
+  # Select final columns for display
+  dplyr::select(Predictor, B, Std_Error, CI, z_value, p_value) %>%
+  # Build the table
+  kbl(
+    caption = "Table 5. Logistic Mixed Model Fixed Effects Estimates",
+    booktabs = TRUE
+   ) %>%
+  kable_classic(full_width = FALSE, html_font = "Times New Roman") %>%
+  footnote(
+    general = paste0(
+      "Note. B = logit coefficient, SE = standard error, z = test statistic, p = p-value, 95% CI in brackets."
+    ),
+    general_title = "Model 1: Temperature, Impulsivity, and Aggression as Predictors of Strongly Costly Retaliation"
+  ) %>%
+  column_spec(1, bold = TRUE)
+
+```
+Heat stress matters: Specifically, being in the HOT condition significantly increases the likelihood of strongly costly retaliation compared to the control condition.
+
+```{r}
+#| label: model2-moderation
+#| include: false
+# Moderation Model (Overall Scores):
+# This model tests whether the effect of temperature on StronglyCostly aggression 
+# is moderated by overall impulsivity (BISTotal) and overall aggression (BPAQTotal).
+logit_model_moderation <- glmer(StronglyCostly ~ temperature_condition * BISTotal +
+                                  temperature_condition * BPAQTotal +
+                                  (1 | ID), 
+                                data = heat_stress_data, 
+                                family = binomial, 
+                                control = glmerControl(optimizer = "bobyqa"), 
+                                nAGQ = 10)
+summary(logit_model_moderation)
+```
+
+```{r}
+#| label: logit-bis-subscales
+#| include: false
+# Moderation Model (BIS Subscales):
+# This model tests whether the effect of temperature on Retaliation_Choice is moderated 
+# by specific facets of impulsivity (BIS_Attentional, BIS_Motor, BIS_Nonplanning).
+logit_bis_subscales <- glmer(
+  StronglyCostly ~ temperature_condition * BIS_Attentional +
+                      temperature_condition * BIS_Motor +
+                      temperature_condition * BIS_Nonplanning +
+                      (1 | ID),
+  family = binomial,
+  data = heat_stress_data,
+  control = glmerControl(optimizer = "bobyqa"),
+  nAGQ = 10
+)
+summary(logit_bis_subscales)
+```
+
+```{r}
+#| label: logit-bpaq-subscales
+#| include: false
+# Moderation Model (BPAQ Subscales):
+# This model tests whether the effect of temperature on Retaliation_Choice is moderated 
+# by specific facets of aggression (BPAQ_Physical, BPAQ_Verbal, BPAQ_Anger, BPAQ_Hostility).
+logit_bpaq_subscales <- glmer(
+  StronglyCostly ~ temperature_condition * BPAQ_Physical +
+                      temperature_condition * BPAQ_Verbal +
+                      temperature_condition * BPAQ_Anger +
+                      temperature_condition * BPAQ_Hostility +
+                      (1 | ID),
+  family = binomial,
+  data = heat_stress_data,
+  control = glmerControl(optimizer = "bobyqa"),
+  nAGQ = 10
+)
+summary(logit_bpaq_subscales)
+```
+
+```{r}
+#| label: logit-model-combined
+#| include: false
+# Combined Moderation Model:
+# This model tests whether the effect of temperature on Retaliation_Choice is moderated 
+# simultaneously by the subscales of impulsivity (BIS_Attentional, BIS_Motor, BIS_Nonplanning)
+# and aggression (BPAQ_Physical, BPAQ_Verbal, BPAQ_Anger, BPAQ_Hostility).
+logit_model_combined <- glmer(
+  StronglyCostly ~ temperature_condition * BIS_Attentional +
+    temperature_condition * BIS_Motor +
+    temperature_condition * BIS_Nonplanning +
+    temperature_condition * BPAQ_Physical +
+    temperature_condition * BPAQ_Verbal +
+    temperature_condition * BPAQ_Anger +
+    temperature_condition * BPAQ_Hostility +
+    (1 | ID),
+  family = binomial,
+  data = heat_stress_data,
+  control = glmerControl(optimizer = "bobyqa"),
+  nAGQ = 10
+)
+summary(logit_model_combined)
+
+```
+
+```{r}
+#| label: fig-scatter-panasna
+#| fig-cap: "Figure 2. Relationship Between Negative Affect and Temperatur"
+#| echo: false
+
+ggplot(heat_stress_data, aes(x = PANASNA_Mean, y = StronglyCostly, color = temperature_condition)) +
+  geom_point(alpha = 0.7, size = 3) +                  # Plot individual data points
+  geom_smooth(method = "lm", se = FALSE) +              # Add linear fit without confidence bands
+  facet_grid(. ~ temperature_condition) +             # Create a panel for each temperature condition
+  labs(
+    title = "Relationship Between Negative Affect and Costly Retaliation",
+    x = "Mean Negative Affect (PANASNA)",
+    y = "Strongly Costly Retaliation Rate",
+    color = "Temperature Condition"
+  ) +
+  theme_apa() +                                       # Use APA style theme
+  theme(
+    strip.text = element_text(size = 10)              # Adjust facet label size for readability
+  )
+```
+
+
+
+
+
+## Results {#sec-methods}
+
+## Discussion {#sec-methods}
+
+
