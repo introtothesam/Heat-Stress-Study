@@ -2,7 +2,7 @@
 # LOAD PACKAGES 
 # -------------------------------------------------
 library(tidyverse)
-
+library(forcats) 
 # -------------------------------------------------
 # READ IN RAW DATASETS
 # -------------------------------------------------
@@ -26,10 +26,13 @@ bpaq_data <- read_csv("data/simulated/BPAQ_raw.csv")
 # 1. Clean `rc_rage_data`
 # -------------------------------------------------
 # Round kill rates and drop unnecessary columns
+# Remove columns safely (only if they exist)
 rc_rage_data <- rc_rage_data %>%
-  mutate(across(starts_with("killRate"), ~ pmin(1, pmax(0, round(.x, 3))))) %>%
-  select(-clickCnt, -killCnt)  # Remove columns before merging
+  dplyr::select(-clickCnt, -killCnt)
 
+# Continue with rounding transformations
+rc_rage_data <- rc_rage_data %>%
+  mutate(across(starts_with("killRate"), ~ pmin(1, pmax(0, round(.x, 3)))))
 # -------------------------------------------------
 # 2. Reshape `panas_data`
 # -------------------------------------------------
@@ -53,7 +56,7 @@ panas_data <- panas_data %>%
   ungroup() %>%  # Remove grouping after computation
   
   # Retain only relevant columns for analysis
-  select(ID, session, timepoint, PANASPA, PANASNA, Hostile_Affect, Irritable_Affect) %>%
+  dplyr::select(ID, session, timepoint, PANASPA, PANASNA, Hostile_Affect, Irritable_Affect) %>%
   
   # Reshape data from long format (one row per timepoint) to wide format 
   pivot_wider(
@@ -101,7 +104,7 @@ bis_data <- bis_data %>%
 
 # Retain only relevant columns
 bis_data <- bis_data %>%
-  select(ID, BIS_Attentional, BIS_Motor, BIS_Nonplanning, BISTotal)
+  dplyr::select(ID, BIS_Attentional, BIS_Motor, BIS_Nonplanning, BISTotal)
 # -------------------------------------------------
 # 4. Rename and Compute `bpaq_data` Subscales
 # -------------------------------------------------
@@ -142,7 +145,7 @@ bpaq_data <- bpaq_data %>%
 
 # Retain only the final BPAQ subscale scores and participant ID
 bpaq_data <- bpaq_data %>%
-  select(ID, BPAQ_Physical, BPAQ_Verbal, BPAQ_Anger, BPAQ_Hostility, BPAQTotal)
+  dplyr::select(ID, BPAQ_Physical, BPAQ_Verbal, BPAQ_Anger, BPAQ_Hostility, BPAQTotal)
 
 # -------------------------------------------------
 # 5. Join Dataset Together
