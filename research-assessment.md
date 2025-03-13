@@ -34,7 +34,7 @@ Submission date: 03-12-2025
 
 Submission number (1-4): 1
 
-Project GitHub repository URL:
+Project GitHub repository URL: <https://github.com/introtothesam/Heat-Stress-Study.git>
 
 Filename of manuscript .qmd: manuscript.qmd
 
@@ -44,7 +44,13 @@ Filename of knitted .pdf: manuscript.pdf
 
 Describe whether and how you used AI/LLMs when completing this project:
 
+I asked ChatGPT while constructing and validating my data simulation script. Specifically, I wanted to generate synthetic rc_rage data using beta distributions to approximate real-world response rates in an experimental task. The reference dataset is the previous study using rc_rage but without heat exposure. I asked ChatGPT for suggestions on different R functions and how best to parameterize the beta distribution.
+
+Additionally, while building the logistic regression models for moderation, I asked ChatGPT for advice on how to structure a hierarchical or mixed-effects model that could capture temperature condition, personality traits, and their interactions. I initially wasn’t sure how to incorporate all variables (temperature, impulsivity, and aggression subscales) into a single model without either over-fitting or losing interpretability.
+
 Optionally (for engagement points) reflect on your use of AI:
+
+For this project, AI helped me which R functions might be most useful for tasks like data simulation and for understanding different modeling strategies. However, for new/ outside class packages, I found it was best to consult the package reference manual or vignettes first, then refine my usage by asking AI clarifying questions. This two-step process ensured the final code aligned with good statistical practice and minimized errors while still benefiting from AI’s speedy suggestions.
 
 ## Overall requirements
 
@@ -303,7 +309,7 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
     4.  Uses dynamic inline R code to render data-dependent text
 
         -   [ ] Objective attempt
-        -   [ ] Objective met
+        -   [x] Objective met
         -   Grader comments:
 
 ### BibTeX
@@ -317,7 +323,7 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
     3.  May use `cite_r()` to cite R and R packages
 
         -   [ ] Objective attempt
-        -   [ ] Objective met
+        -   [x] Objective met
         -   Grader comments:
 
 21. Render an APA7 references page from a .bib file
@@ -333,7 +339,7 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
     5.  May include references not cited in-text
 
         -   [ ] Objective attempt
-        -   [ ] Objective met
+        -   [x] Objective met
         -   Grader comments:
 
 ### Notebooks and code chunks
@@ -358,7 +364,7 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     2.  Loads packages in at least 1 code chunk
 
-    3.  \*Sets preferences/options in at least 1 code chunk
+    3.  Sets preferences/options in at least 1 code chunk
 
     4.  Organizes setup chunks sensibly
 
@@ -428,7 +434,7 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
     3.  Ideally, uses inline R references for *all* data-dependent text
 
         -   [ ] Objective attempt
-        -   [ ] Objective met
+        -   [x] Objective met
         -   Grader comments:
 
 29. Run inline R functions to render dynamic data-dependent text
@@ -436,7 +442,7 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
     1.  Uses inline R functions to render at least 3 unique data-dependent text outputs (e.g., performs rounding, calculates means, subtracts one list length from another, etc. -- inline rather than in a code chunk)
 
         -   [ ] Objective attempt
-        -   [ ] Objective met
+        -   [x] Objective met
         -   Grader comments:
 
 30. Use `knitr` and quarto to produce an APA7 formatted 1-click PDF manuscript
@@ -458,21 +464,50 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 Optionally (for engagement points) write a brief reflection about your work on this project. You can use this space to answer the following questions, but feel free to ignore these questions and write about whatever you think is most important.
 
 -   What was the most challenging aspect of this project?
+
+One of the biggest hurdles was dealing with ongoing data collection. Initially, I had planned on using real participant data, but the timeline required me to simulate a dataset for this final project. Ensuring that the simulated data captured the complexity of real-world behavioral outcomes was both technically and conceptually challenging. I spent a substantial amount of time exploring how to parameterize the data in `simstudy` so that it would plausibly reflect real behaviors from a heat-stress aggression paradigm.
+
 -   What was the most rewarding aspect of this project?
+
+Despite the challenges, it was extremely gratifying to see the entire analytical pipeline: loading libraries, simulating data, running transformations, analyzing data, fitting hierarchical logistic regression models, and rendering a polished PDF in APA format.Generating that final PDF felt especially satisfying, and I know this approach will be invaluable for future scientific writing. Another highlight was setting up a seamless link between the citr addin and my Zotero library; this made citing references effortless and kept everything well-organized. Even though I’m currently using a simulated dataset, I’ve structured my analysis pipeline in a way that will plug in real data as soon as it becomes available. Specifically, I created a “raw” dataset format that mirrors our ongoing data collection, ensuring `data_transformation.R` can process actual participant data with minimal changes. This forward-thinking strategy should save time and maintain reproducibility when transitioning from simulated to real-world data.
+
 -   What would you do differently if you were to start over?
+
+I will restart this project with my actual dataset in the coming months, replacing the simulated data with real participant data. When analyzing the real dataset, I plan to incorporate **bootstrapping** when computing the logistic mixed-effects model to improve the robustness of my estimates. Additionally, I expect to observe some meaningful effects in the moderation or mediation analyses, which were not fully interpretable with the simulated data. Having the real dataset will allow me to refine the statistical models further and validate whether the hypothesized relationships hold under empirical conditions.
+
 -   What did you learn from this project that you will carry forward to future projects?
+
+Using Quarto and APAQuarto allowed me to generate a fully formatted, publication-ready APA7 manuscript with a single click. I now feel confident in structuring future scientific writing projects using Quarto, ensuring reproducibility and professional formatting without manual intervention. I gained hands-on experience in structuring, organizing, and processing a full dataset from start to finish. This included simulating data that mimicked real-world collection methods, transforming raw variables into analyzable formats, and systematically handling missing values and inconsistencies. These skills will translate directly to working with real experimental data in the future. This project solidified my ability to conduct data analysis methodically, starting from descriptive statistics, progressing to inferential analyses (e.g., ANOVA, logistic mixed-effects models), and culminating in a well-structured research report. Writing the manuscript while integrating analysis in a structured, step-by-step fashion is a workflow I will continue to follow in future projects. Effectively using GitHub for version control was also crucial for keeping my project organized.
+
 -   What are you most proud of in this project?
+
+I’m particularly proud of how the final manuscript turned out, especially the seamless integration of multiple tables and figures within Quarto. I used a variety of markdown features, including cross-referencing, footnotes, chunk options, to make the final PDF look professional and academically polished. In addition, I adopted some sophisticated statistical approaches, particularly hierarchical logistic regressions with moderation, which I think goes beyond a standard class project and showcases how powerful R can be for advanced modeling.
 
 Alternatively/additionally in mind some of the suggested ways to earn engagement points, and expand on this (or other aspects of your project) in your reflection:
 
 -   Creating many figures and tables, or particularly complex or creative ones
+
+I created several tables to display descriptive statistics, ANOVA results, and regression summaries, along with multiple plots (bar plots with facets, scatterplots) that illustrate the hypothetical effects of heat stress on aggression. This allowed me to demonstrate a range of visualization and reporting skills.
+
 -   Impressively thoughtful and thorough narrative writing in your literature review or discussion section
+
+I devoted significant effort to the Introduction and Discussion sections, ensuring that the literature review on heat stress and aggression was comprehensive while also linking it to a novel behavioral measure—the RC-RAGE task. Summarizing previous research while integrating theoretical frameworks like the Temperature-Aggression Hypothesis and the General Aggression Model was both intellectually stimulating and crucial for setting up the study’s rationale. In the Results section, I applied best practices for scientific reporting by using inline R functions to dynamically update statistical outputs within the text. This approach ensured that all reported values—means, standard deviations, p-values, confidence intervals, and effect sizes—were automatically linked to the data, reducing the risk of manual errors and enhancing reproducibility. Additionally, I focused on interpreting statistical findings in a clear and meaningful way, contextualizing ANOVA results, logistic mixed-effects models, and potential moderation effects to make the data-driven insights more accessible.
+
 -   Employing sophisticated statistical techniques in your analysis
+
+This project incorporated advanced statistical modeling techniques beyond standard hypothesis testing. In addition to one-way ANOVAs, I implemented hierarchical logistic mixed-effects models to account for repeated measures within participants. These models allowed me to investigate whether trait aggression and impulsivity moderated the relationship between heat stress and retaliation rates, providing a more nuanced understanding of individual differences in aggressive behavior. This project strengthened my ability to select appropriate statistical techniques for complex research questions, a skill that will be invaluable in future studies.
+
 -   Making excellent use of markdown features to create a polished final product
+
+I also made excellent use of Quarto markdown features to create a polished, publication-ready manuscript, leveraging cross-referencing for figures and tables, inline R code for dynamic statistical updates, and formatted tables using `kableExtra` and `apaTables`. These elements ensured seamless automation between data analysis and reporting.
+
 -   Having a maximally reproducible and dynamic manuscript
+
+The manuscript was designed to be maximally reproducible, with sourcing scripts for data simulation and transformation, relative file paths for portability, automated citation management through Zotero, and inline R functions to eliminate errors in manual reporting. This reproducibility means that once real data is available, I can integrate it directly into the pipeline, automatically updating all analyses, tables, and interpretations.
+
 -   Fully committing to best practices for version control and GitHub integration/organization
 
-Since the data collection of this project is ongoing, i simulated dataset for this final project. Before simulating the dataset, i refer to previous open access dataset from the previous RC-RAGE study, and intentionally store in the localonly/raw file, and add the localonly/ to gitignore (since i only refer the dataset structure). To simulated a dataset, i explored a package `simstudy`.
+I maintain my repo frequent, well-documented commits, use a `.gitignore` file to manage sensitive or unnecessary files, structure the repository with clearly organized directories, and write a detailed README to ensure accessibility.
 
 ## Grading
 
