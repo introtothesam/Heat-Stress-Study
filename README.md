@@ -9,16 +9,12 @@ This project investigates the effects of heat stress on reactive aggression and 
 ## Research Questions
 
 1.  How does heat stress influence reactive aggression?
-2.  What role do cognitive and affective mediators play?
-3.  How do individual differences (e.g., impulsivity, aggression, emotional awareness, heat sensitivity) moderate these effects?
+2.  How do individual differences (e.g., impulsivity, aggression) moderate these effects?
 
 ## Hypotheses
 
--   **Affect-Based Pathway:** Heat stress increases negative affect (e.g., anger), leading to higher costly retaliation rates.
--   **Cognitive Pathway:** Heat stress impairs cognitive control, increasing aggression.
 -   **Trait Moderation:** Individuals high in trait impulsivity and aggression will show greater aggression under heat stress.
--   **Emotional Awareness:** Low emotional awareness (clarity and attention) will be linked to greater aggression under heat stress.
--   **Heat Sensitivity:** Individuals with higher sensitivity to heat discomfort will exhibit greater aggression under heat stress.
+-   **Affect-Based Pathway:** Heat stress increases negative affect (e.g., anger), leading to higher costly retaliation rates.
 
 ## Study Summary
 
@@ -54,11 +50,24 @@ This will output the directory tree structure:
 ├── Heat-Stress-Study.Rproj
 ├── README.md
 ├── data
+│   ├── heat_stress_ctrl.csv
+│   ├── heat_stress_data.csv
+│   ├── heat_stress_hot.csv
+│   ├── heat_stress_mid.csv
 │   └── simulated
-├── images
-├── localonly
+│       ├── BIS_raw.csv
+│       ├── BPAQ_raw.csv
+│       ├── demographics.csv
+│       ├── novaco_raw.csv
+│       ├── panas_raw.csv
+│       └── rc_rage_raw.csv
+├── manuscript.pdf
+├── manuscript.qmd
+├── references.bib
 ├── research-assessment.md
 └── source
+    ├── data_simulation.R
+    └── data_transformation.R
 ```
 
 ## Data Simulation
@@ -73,14 +82,6 @@ Since full data collection is ongoing, I simulate a dataset using `simstudy` to 
     -   BPAQ Aggression Questionnaire
     -   Clarity and Attention to Emotions Scale
     -   Temperature Perceptions scale
-
-### Running the Simulation
-
-To generate the dataset, run:
-
-``` r
-source("source/data_simulation.R")
-```
 
 ## Contact
 
