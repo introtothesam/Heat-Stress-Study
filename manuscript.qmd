@@ -1,5 +1,5 @@
 ---
-title: "The Impact of Heat Stress on Reactive Aggression: Exploring the Roles of Impulsivity, Trait Aggression, and Internal State"
+title: "The Impact of Heat Stress on Reactive Aggression: Exploring the Roles of Impulsivity and Trait Aggression Moderators"
 shorttitle: "Heat Stress and Aggression"
 author:
   - name: "Chenyi Dai"
@@ -11,7 +11,7 @@ author:
         city: "Chicago"
         region: "IL"
         postal-code: "60637"
-abstract: "This study investigates the effects of heat stress on reactive aggression, examining potential mediators (negative affect, anger) and moderators (impulsivity, trait aggression). Using simulated data, we apply mediation and moderation analyses to explore these relationships."
+abstract: "This study examines the impact of heat stress on reactive aggression and the moderating roles of impulsivity and trait aggression. Using a within-subjects, three-session design, participants were exposed to room temperature (72°F), moderate heat (97°F), and extreme heat (113°F) while completing the Retaliate or Carry-On: Reactive Aggression Experiment (RC-RAGE). A significant main effect of temperature was found for strongly costly retaliation, with participants in the heat condition exhibiting significantly higher costly retaliation rates than those in the control and moderate heat conditions. The current data collection is ongoing; this report mimics the data collection process using simulated data to establish the planned analytical pipeline and ensure methodological rigor."
 keywords: [Heat stress, Aggression, Impulsivity, Retaliation, Mediation, Moderation]
 bibliography: references.bib
 format:
@@ -42,6 +42,15 @@ library(simstudy)    # Simulating data for behavioral datasets
 # install.packages("simstudy")
 library(data.table)  # Efficient data manipulation
 # install.packages("data.table")
+
+# Set global chunk options for Quarto
+knitr::opts_chunk$set(
+  echo = FALSE,    # Hide code by default
+  warning = FALSE, # Suppress warnings
+  message = FALSE, # Suppress messages
+  fig.width = 8,   # Set figure width
+  fig.height = 6   # Set figure height
+)
 
 # Set a seed for reproducibility
 set.seed(1234)
@@ -79,27 +88,52 @@ glimpse(heat_stress_data)
 
 ## Introduction {#sec-introduction}
 
-The physiological mechanisms that discovered the effects of thermal exposure on human core and skin temperatures were fully explained by previous literature, with extensive research highlighting how heat influences psychological and behavioral outcomes. Thermal stress impacts cognition (Hancock & Vasmatzidis, 2003), neurotransmitter activity involving norepinephrine, dopamine, and serotonin (Lõhmus, 2018), stress hormone levels (Brenner et al., 1998), and emotional states (Escobar et al., 2021). Understanding these effects has taken on heightened importance in the context of global climate change and rising ambient temperatures. Elevated temperatures have been associated with increased substance use, violent crimes such as robbery and homicide (Tomassini et al., 2024; Thomas & Wolff, 2023), and higher suicide rates: studies suggest that a 1°C rise in air temperature correlates with an uptick in suicides (Kim et al., 2010; Burke et al., 2018). One established framework is the Heat Hypothesis, proposed by Anderson (2001), which posits that high temperatures elevate aggressive motivation and the likelihood of aggressive behavior. For instance, improved climate control in institutional settings (e.g., prisons, schools, and the workplace) has been recommended as a potential strategy to mitigate aggression (Anderson, 2001). Additionally, heat stress significantly impacts occupational health and safety. High temperatures pose physical health risks and impair cognitive performance, especially in hot work environments (Srinivasan et al., 2024). Workplaces involving complex tasks are particularly vulnerable to heat-induced declines in productivity and decision-making accuracy (Spector et al., 2019). These findings underscore the importance of investigating the relationship between heat stress and behavioral and psychological dysregulation, as this can inform strategies to address mental health challenges and mitigate aggression-related issues in occupational, social, and institutional contexts. This study specifically examines the effects of heat stress on aggression, exploring potential mediating variables such as cognitive performance, emotional regulation, and individual differences to better understand the mechanisms driving this relationship. Investigating these dynamics aims to provide evidence-based insights that can guide the formulation of policies and interventions to enhance psychological resilience, reduce aggression, and improve overall quality of life in the face of challenges posed by global warming.
-Both observational and experimental studies demonstrate a significant relationship between heat stress and aggression. Observational research, such as a study examining aggression by assault death data from Seoul, found that the overall risk of death by assault increased by 1.4% for every 1°C rise in ambient temperature (Kim et al., 2023). Experimental findings complement these observations; for example, Baron and Bell (1976) found that high ambient temperatures raised behavioral aggression as participants delivered stronger electric shocks under heat conditions. Psychological theories like the Temperature-Aggression Hypothesis (Anderson et al., 2000) support this connection between heat and aggression. This theory posits that elevated temperatures increase aggressive motivation and, under conducive circumstances, lead to aggressive behavior. 
-Aggression can be categorized into two primary types: reactive aggression, characterized as impulsive and emotionally driven in response to provocation or frustration, and proactive aggression, which is calculated, goal-directed, and less tied to emotional states (Poulin & Boivin, 2000). The distinction is critical, as reactive aggression is often tied to situational factors like environmental stressors, whereas proactive aggression is primarily influenced by genetic and learned behaviors (Tuvblad et al., 2009; Bandura, 1973). Given its strong ties to emotional and environmental triggers, this study focuses specifically on reactive aggression taking heat stress as the input variable, employing the Retaliate or Carry-On: Reactive Aggression Experiment (RC-RAGE), developed by Meidenbauer et al. (2024), to investigate how rising temperatures influence impulsive, provocation-driven aggression under controlled experimental conditions.
-Meidenbauer et al. (2024) emphasized the need for tasks that elicit reactive aggression in experimental settings, especially among socially desirable individuals, as social desirability skews self-reported and behavioral aggression measures, a mismatch attributed to test content rather than a common desirability factor (Vigil-Colet et al., 2012). To address this, the RC-RAGE was developed to fill a methodological gap by offering a reactive aggression metric suitable for experimental settings, enabling immediate impulsive responses, imposing a tangible cost to retaliation, and minimizing the influence of social desirability biases. Findings demonstrated that costly, reactive aggression is significantly influenced by impulsivity, reflecting a tendency to act without planning. Building on the Temperature-Aggression Hypothesis (Anderson et al., 2000), which identifies cognitive (e.g., accessibility of aggressive thoughts), affective (e.g., heightened hostility or anger), and arousal (e.g., increased heart rate) pathways through which input variables influence aggression, and the General Aggression Model (DeWall et al., 2011), which highlights the interaction between individual differences (e.g., impulsivity) and environmental stressors (e.g., heat), this study incorporates several internal state variables—impulsivity trait, aggression trait, personality factors, cognitive flexibility, working memory, emotional clarity and attention, temperature perception, and substance consumption—as potential mediators to provide a comprehensive understanding of the heat-aggression process.
-To better understand the mechanisms linking heat exposure to aggression, the current within-subjects, crossover design experiment focuses on potential mediators such as cognitive flexibility, working memory, and subjective discomfort because of their established links to aggression and cognitive performance. For example, neuroticism and extraversion have direct positive effects on physical aggression (Cavalcanti & Pimentel, 2016), and neuroticism is associated with greater discomfort in response to environmental temperature (LeBlanc et al., 2003).T0(Kleider & Parrott, 2008). Previous research shows that heat stress impairs working memory, attention, response speed, and processing speed (Mazloumi et al., 2014). However, cognitive functions largely remain unaffected unless thermal stress significantly shifts core body temperature away from steady-state conditions (Hancock & Vasmatzidis, 2003). Interestingly, subjective discomfort from heat can impair cognitive flexibility even when core body temperature and cortical excitability are unaffected (Gaoua et al., 2012). To isolate the physiological effects of heat stress, this study will control heat exposure duration to ensure participants maintain steady-state core temperatures while monitoring subjective discomfort and skin temperature. 
+The physiological mechanisms that discovered the effects of thermal exposure on human core and skin temperatures were fully explained by previous literature, with extensive research highlighting how heat influences psychological and behavioral outcomes. Thermal stress impacts cognition [@hancockEffectsHeatStress2003a], neurotransmitter activity involving norepinephrine, dopamine, and serotonin [@lohmusPossibleBiologicalMechanisms2018a], stress hormone levels [@brennerStressHormonesImmunological2007a], and emotional states [@escobarTemperatureEmotions2021]. Understanding these effects has taken on heightened importance in the context of global climate change and rising ambient temperatures. Elevated temperatures have been associated with increased substance use, violent crimes such as robbery and homicide [@tomassiniExploringNexusClimate2024; @thomasWeirdWinterWeather2023], and higher suicide rates: studies suggest that a 1°C rise in air temperature correlates with an uptick in suicides [@kimAssociationDailyEnvironmental2011]; [@burkeHigherTemperaturesIncrease2018]. One established framework is the Heat Hypothesis, proposed by @andersonHeatViolence2001a, which posits that high temperatures elevate aggressive motivation and the likelihood of aggressive behavior. For instance, improved climate control in institutional settings (e.g., prisons, schools, and the workplace) has been recommended as a potential strategy to mitigate aggression [@andersonHeatViolence2001a]. Additionally, heat stress significantly impacts occupational health and safety. High temperatures pose physical health risks and impair cognitive performance, especially in hot work environments [@srinivasanImpactHeatStress2024a]. Workplaces involving complex tasks are particularly vulnerable to heat-induced declines in productivity and decision-making accuracy [@spectorHeatExposureOccupational2019a]. These findings underscore the importance of investigating the relationship between heat stress and behavioral and psychological dysregulation, as this can inform strategies to address mental health challenges and mitigate aggression-related issues in occupational, social, and institutional contexts. This study specifically examines the effects of heat stress on aggression, exploring potential mediating variables such as cognitive performance, emotional regulation, and individual differences to better understand the mechanisms driving this relationship. Investigating these dynamics aims to provide evidence-based insights that can guide the formulation of policies and interventions to enhance psychological resilience, reduce aggression, and improve overall quality of life in the face of challenges posed by global warming.
 
+Both observational and experimental studies demonstrate a significant relationship between heat stress and aggression. Observational research, such as a study examining aggression by assault death data from Seoul, found that the overall risk of death by assault increased by 1.4% for every 1°C rise in ambient temperature [@kimPositiveAssociationAggression2023]. Experimental findings complement these observations; for example, @baronAggressionHeatInfluence1976 found that high ambient temperatures raised behavioral aggression as participants delivered stronger electric shocks under heat conditions. Psychological theories like the Temperature-Aggression Hypothesis [@andersonTemperatureAggression2000] support this connection between heat and aggression. This theory posits that elevated temperatures increase aggressive motivation and, under conducive circumstances, lead to aggressive behavior. Aggression can be categorized into two primary types: reactive aggression, characterized as impulsive and emotionally driven in response to provocation or frustration, and proactive aggression, which is calculated, goal-directed, and less tied to emotional states [@poulinReactiveProactiveAggression2000]. The distinction is critical, as reactive aggression is often tied to situational factors like environmental stressors, whereas proactive aggression is primarily influenced by genetic and learned behaviors. Given its strong ties to emotional and environmental triggers, this study focuses specifically on reactive aggression taking heat stress as the input variable, employing the Retaliate or Carry-On: Reactive Aggression Experiment (RC-RAGE), developed by @meidenbauerCharacterizingRoleImpulsivity2024a, to investigate how rising temperatures influence impulsive, provocation-driven aggression under controlled experimental conditions.
+
+@meidenbauerCharacterizingRoleImpulsivity2024a emphasized the need for tasks that elicit reactive aggression in experimental settings, especially among socially desirable individuals, as social desirability skews self-reported and behavioral aggression measures, a mismatch attributed to test content rather than a common desirability factor [@vigil-coletImpactSocialDesirability2012]. To address this, the RC-RAGE was developed to fill a methodological gap by offering a reactive aggression metric suitable for experimental settings, enabling immediate impulsive responses, imposing a tangible cost to retaliation, and minimizing the influence of social desirability biases. Findings demonstrated that costly, reactive aggression is significantly influenced by impulsivity, reflecting a tendency to act without planning. Building on the Temperature-Aggression Hypothesis [@andersonTemperatureAggression2000], which identifies cognitive (e.g., accessibility of aggressive thoughts), affective (e.g., heightened hostility or anger), and arousal (e.g., increased heart rate) pathways through which input variables influence aggression, and the General Aggression Model [@dewallGeneralAggressionModel2011a], which highlights the interaction between individual differences (e.g., impulsivity) and environmental stressors (e.g., heat), this study incorporates several internal state variables—impulsivity trait, aggression trait, personality factors, cognitive flexibility, working memory, emotional clarity and attention, temperature perception, and substance consumption—as potential mediators to provide a comprehensive understanding of the heat-aggression process. To better understand the mechanisms linking heat exposure to aggression, the current within-subjects, crossover design experiment focuses on potential mediators such as cognitive flexibility, working memory, and subjective discomfort because of their established links to aggression and cognitive performance. For example, neuroticism and extraversion have direct positive effects on physical aggression [@cavalcantiPersonalityAggressionContribution2016], and neuroticism is associated with greater discomfort in response to environmental temperature [@leblancResponseThermalStress2003; @kleiderAggressiveShootingBehavior2009]. Previous research shows that heat stress impairs working memory, attention, response speed, and processing speed [@mazloumiEvaluatingEffectsHeat]. However, cognitive functions largely remain unaffected unless thermal stress significantly shifts core body temperature away from steady-state conditions [@hancockEffectsHeatStress2003a]. Interestingly, subjective discomfort from heat can impair cognitive flexibility even when core body temperature and cortical excitability are unaffected [@gaouaSensoryDispleasureReduces2012a]. To isolate the physiological effects of heat stress, this study will control heat exposure duration to ensure participants maintain steady-state core temperatures while monitoring subjective discomfort and skin temperature.
+
+## Research Question
+
+How does heat stress influence reactive aggression, and what role do moderating variables such as impulsivity and aggression play in this relationship?
+
+## Hypothesis
+
+Heat stress will increase aggression, with the effects being more pronounced in individuals with high trait impulsivity and high trait aggression。
 
 ## Methods {#sec-methods}
+
 ### Experimental Design
 
-Data will be collected through a three-part, on-site study consisting of three sessions held at the same time and on the same day of the week, spaced one week apart. During two sessions, the chamber will be set to elevated temperatures, while in the other session, it will be set to room temperature. Participants will sit in a controlled sauna environment, wearing a bioharness to monitor physiological indicators such as core body temperature, skin temperature, and heart rate variability. They will also complete cognitive tasks assessing working memory (Backward Digit Span task) and cognitive flexibility (Stop Signal Task), along with a novel task to evaluate reactive aggression (RC-RAGE task). Prior research has shown that heat stress may impair memory (Lee et al., 2015) and cognitive flexibility (Gaoua et al., 2012b). This study extends these findings by introducing a novel paradigm designed to assess provoked aggression in situations where self-control is required (Meidenbauer et al., 2023).  
+Data will be collected through a three-part, on-site study consisting of three sessions held at the same time and on the same day of the week, spaced one week apart. During two sessions, the chamber will be set to elevated temperatures, while in the other session, it will be set to room temperature. Participants will sit in a controlled sauna environment, wearing a bioharness to monitor physiological indicators such as core body temperature, skin temperature, and heart rate variability. They will also complete cognitive tasks assessing working memory (Backward Digit Span task) and cognitive flexibility (Stop Signal Task), along with a novel task to evaluate reactive aggression (RC-RAGE task). Prior research has shown that heat stress may impair memory and cognitive flexibility [@gaouaSensoryDispleasureReduces2012a]. This study extends these findings by introducing a novel paradigm designed to assess provoked aggression in situations where self-control is required [@meidenbauerCharacterizingRoleImpulsivity2024a].
 
 ### Participants
 
-Participant recruitment will occur through the University of Chicago Research System, Facebook groups, and campus flyers, with eligibility determined via online pre-screening. Exclusion criteria include chronic health issues, non-normal vision, non-English speakers, age outside 18-35, and BMI over 35. The pre-screening survey includes the BIS-11 Impulsivity Questionnaire (Patton et al., 1995), BPAQ Aggression Questionnaire (Buss & Perry, 1992), Big Five Inventory–2 Short Form (BFI-2-S) (Soto & John, 2017), Clarity and Attention to Emotions Scale (Palmieri et al., 2009), Temperature Perceptions scale (Wang et al., 2020), and DFAQ-CU Inventory (Cuttler & Spradlin, 2017). These questionnaires assess participants' impulsivity, aggression, facet traits, emotional awareness, thermal comfort, and cannabis use to provide baseline measures for analyzing how individual differences in each trait may influence responses under heat stress. The questionnaire order was randomized through Qualtrics.
+Participant recruitment will occur through the University of Chicago Research System, Facebook groups, and campus flyers, with eligibility determined via online pre-screening. Exclusion criteria include chronic health issues, non-normal vision, non-English speakers, age outside 18-35, and BMI over 35. The pre-screening survey includes the BIS-11 Impulsivity Questionnaire [@pattonFactorStructureBarratt1995a], BPAQ Aggression Questionnaire [@bussAggressionQuestionnaire1992], Big Five Inventory–2 Short Form (BFI-2-S) [@sotoShortExtrashortForms2017], Clarity and Attention to Emotions Scale [@palmieriMeasuringClarityAttention2009], Temperature Perceptions scale [@wangInterindividualDifferencesMale2020], and DFAQ-CU Inventory [@cuttlerMeasuringCannabisConsumption2017]. These questionnaires assess participants' impulsivity, aggression, facet traits, emotional awareness, thermal comfort, and cannabis use to provide baseline measures for analyzing how individual differences in each trait may influence responses under heat stress. The questionnaire order was randomized through Qualtrics.
 
 ### Procedure
 
-This study adheres to ethical guidelines approved by the University of Chicago Institutional Review Board (IRB 19-1977). Before the study, participants are instructed to refrain from consuming alcohol or using any drugs for 24 hours. Following the acquisition of informed consent, participants are instructed to place a bioharness strap with a heart rate monitor core body temperature sensor under a standardized heat suit. Participants are seated, and baseline physiological data are collected for 5 minutes. Participants are then instructed on the tasks they will complete in the chamber. Participants then enter the heat chamber where they have been randomly assigned to one of three temperature conditions: 97°F, 113°F, or room temperature for 50 minutes. Following a 5-minute heat chamber calibration, participants first complete the Backward Digit Span task (Wechsler, 1955), which assesses working memory by requiring them to recall a series of digits in reverse order. Participants are presented with a string of numbers, which they must repeat back in the opposite sequence. Next, participants complete the Stop Signal Task (Lappin & Eriksen, 1966), which evaluates their cognitive flexibility and response inhibition. They are shown a series of directional arrows and must quickly choose one of two options based on the arrow’s direction. After completing the cognitive tasks, participants are instructed to take a five-minute break, during which they are told that a researcher needs to check on the progress of another participant in a different room. This statement is intended to lead participants to believe they have been randomly assigned to the role of the "gatherer" in an upcoming game against another human player assigned to the role of the “robber”. The deception is crucial for maintaining the integrity of the measurement of reactive aggression. In the RC-RAGE task, participants spend 12 minutes maximizing their earnings by collecting "apples" toward a “harvest” of 10 apples (10 apples = 10 cents), while dealing with a "robber" who occasionally steals 5 cents. Participants can either retaliate by shooting (regaining 3 cents but resetting progress) or continue collecting while ignoring the robber. Retaliation costs vary based on progress: advantageous (retaliation at 1-2 clicks), modestly costly (retaliation at 3-4 clicks), or strongly costly (retaliation at 6-7 clicks). Participants are informed on the best strategy of retaliation to maximize gains. 
+This study adheres to ethical guidelines approved by the University of Chicago Institutional Review Board (IRB 19-1977). Before the study, participants are instructed to refrain from consuming alcohol or using any drugs for 24 hours. Following the acquisition of informed consent, participants are instructed to place a bioharness strap with a heart rate monitor core body temperature sensor under a standardized heat suit. Participants are seated, and baseline physiological data are collected for 5 minutes. Participants are then instructed on the tasks they will complete in the chamber. Participants then enter the heat chamber where they have been randomly assigned to one of three temperature conditions: 97°F, 113°F, or room temperature for 50 minutes. Following a 5-minute heat chamber calibration, participants first complete the Backward Digit Span task [@wechslerManualWechslerAdult1955], which assesses working memory by requiring them to recall a series of digits in reverse order. Participants are presented with a string of numbers, which they must repeat back in the opposite sequence. Next, participants complete the Stop Signal Task [@lappinUseDelayedSignal1966], which evaluates their cognitive flexibility and response inhibition. They are shown a series of directional arrows and must quickly choose one of two options based on the arrow’s direction. After completing the cognitive tasks, participants are instructed to take a five-minute break, during which they are told that a researcher needs to check on the progress of another participant in a different room. This statement is intended to lead participants to believe they have been randomly assigned to the role of the "gatherer" in an upcoming game against another human player assigned to the role of the “robber”. The deception is crucial for maintaining the integrity of the measurement of reactive aggression. In the RC-RAGE task, participants spend 12 minutes maximizing their earnings by collecting "apples" toward a “harvest” of 10 apples (10 apples = 10 cents), while dealing with a "robber" who occasionally steals 5 cents. Participants can either retaliate by shooting (regaining 3 cents but resetting progress) or continue collecting while ignoring the robber. Retaliation costs vary based on progress: advantageous (retaliation at 1-2 clicks), modestly costly (retaliation at 3-4 clicks), or strongly costly (retaliation at 6-7 clicks). Participants are informed on the best strategy of retaliation to maximize gains.
 
 ### Statistical analysis
+
+The analysis plan followed a multi-step approach. Initially, descriptive statistics were computed to summarize key variables, including retaliation rates across temperature conditions and individual difference measures (impulsivity, aggression, and affect). This provided an overview of the dataset and informed subsequent analyses (See @tbl-descriptive-stats). Additionally, a gender distribution analysis was conducted to determine whether the dataset allows for meaningful sex-based comparisons (See @tbl-gender-distribution). Visualization techniques were applied to explore the distribution of retaliation types under different conditions (See @fig-costly-retaliation-facet).
+
+To test whether heat stress increases costly retaliation, a series of one-way ANOVAs were conducted separately for modestly costly and strongly costly retaliation rates. These models assessed whether retaliation rates significantly differed between control, moderate, and high-temperature conditions (See @tbl-anova-modestly-table; See @tbl-anova-strongly-table). Significant findings would suggest that temperature exposure influences aggressive responses.
+
+To investigate the role of individual differences, a logistic mixed-effects regression model was estimated to predict strongly costly retaliation. The predictors included temperature condition, trait impulsivity (BISTotal), and trait aggression (BPAQTotal), while controlling for repeated measures within participants (random intercept: ID). This model addressed the question: Do personality traits influence retaliation tendencies under different temperature conditions? (See @tbl-logit-table).
+
+Given previous research suggesting that impulsivity and aggression may moderate the effects of heat stress on aggression, a series of moderation models were then tested:
+
+1. *Overall Moderation Model:* Examined whether overall impulsivity (BISTotal) and aggression (BPAQTotal) moderated the effect of temperature on strongly costly retaliation.
+2. *BIS Subscale Moderation:* Tested whether specific facets of impulsivity (BIS Attentional, BIS Motor, BIS Nonplanning) interacted with temperature condition to influence retaliation.
+3. *BPAQ Subscale Moderation:* Investigated whether different aspects of aggression (BPAQ Physical, BPAQ Verbal, BPAQ Anger, BPAQ Hostility) modified the temperature-aggression relationship.
+4. *Combined Moderation Model:* Simultaneously tested all impulsivity and aggression subscales to determine their collective moderating effect.
+
+These models assessed whether certain personality traits increase susceptibility to aggression under heat stress.
+
+Finally, a correlational analysis was conducted to examine the relationship between negative affect (PANASNA scores) and strongly costly retaliation rates within each temperature condition. A significant correlation would suggest that heightened negative affect might mediate the relationship between heat stress and aggression (See @fig-scatter-panasna).
 
 ```{r}
 #| label: calculate-negative-affect
@@ -112,6 +146,14 @@ heat_stress_data <- heat_stress_data %>%
     PANASPA_Mean = rowMeans(across(starts_with("PANASPA_T")), na.rm = TRUE)
   )
 ```
+
+## Results
+
+### Descriptive Statistics and Preliminary Analyses
+
+Descriptive statistics for key variables are presented in @tbl-descriptive-stats. The mean level of two types of costly retaliation across all conditions was `r round(mean(heat_stress_data$StronglyCostly + heat_stress_data$ModestlyCostly, na.rm = TRUE), 2)`, with a standard deviation of `r round(sd(heat_stress_data$StronglyCostly + heat_stress_data$ModestlyCostly, na.rm = TRUE), 2)`. Negative affect scores (PANASNA) had a mean of `r round(mean(heat_stress_data$PANASNA_Mean, na.rm = TRUE), 2)` (SD = `r round(sd(heat_stress_data$PANASNA_Mean, na.rm = TRUE), 2)`).
+
+The sample was highly skewed towards female participants, with `r sum(heat_stress_data$gender == 'Female', na.rm = TRUE)` females (representing `r round(mean(heat_stress_data$gender == 'Female', na.rm = TRUE) * 100, 2)`%) and `r sum(heat_stress_data$gender == 'Male', na.rm = TRUE)` males (`r round(mean(heat_stress_data$gender == 'Male', na.rm = TRUE) * 100, 2)`%). Given the imbalance, gender effects should be interpreted cautiously.
 
 ```{r}
 #| label: descriptive-numeric-stats
@@ -134,8 +176,11 @@ descriptive_stats <- heat_stress_data %>%
 ```
 
 ```{r}
-#| label: table-descriptive-stats
+#| label: tbl-descriptive-stats
+#| tbl-cap: "Descriptive Statistics for Key Variables"
+#| tbl-cap-location: margin
 #| echo: false
+
 # Create structured APA-style table
 heat_stress_data <- heat_stress_data %>%
   mutate(CostlyRetaliation = ModestlyCostly + StronglyCostly)
@@ -168,14 +213,14 @@ descriptive_table <- tibble(
 # Format and print the table in APA-like style
 descriptive_table %>%
   mutate(across(where(is.numeric), ~ round(., 2))) %>%  # Round numeric columns
-  kbl(
-    caption = "Table 1. Descriptive Statistics of Key Variables"
-  ) %>%
+  kbl() %>%
   kable_classic(full_width = FALSE, html_font = "Times New Roman")
 ```
 
 ```{r}
-#| label: descriptive-non-numeric-stats
+#| label: tbl-gender-distribution
+#| tbl-cap: "Descriptive Statistics for Gender Distrivution"
+#| tbl-cap-location: margin
 #| echo: false
 # Summarize gender distribution
 gender_counts <- heat_stress_data %>%
@@ -192,15 +237,13 @@ gender_counts %>%
   mutate(
     Proportion = round(Proportion, 2)  # Round proportion to 2 decimals
   ) %>%
-  kbl(
-    caption = "Table 2. Gender Distribution of Participants"
-  ) %>%
+  kbl( ) %>%
   kable_classic(full_width = FALSE, html_font = "Times New Roman")
 ```
 
 ```{r}
 #| label: fig-costly-retaliation-facet
-#| fig-cap: "Figure 1. Retaliation Rates Across Temperature Conditions"
+#| fig-cap: "Retaliation Rates Across Temperature Conditions"
 #| echo: false
 
 # Ensure correct order for temperature conditions
@@ -247,7 +290,8 @@ summary(anova_strongly)
 ```
 
 ```{r}
-#| label: anova-modestly-table
+#| label: tbl-anova-modestly-table
+#| tbl-cap: "One-Way ANOVA for Modestly Costly Retaliation"
 #| echo: false
 # Tidy the ANOVA result for Modestly Costly Retaliation
 anova_modestly_tidy <- tidy(anova_modestly) %>%
@@ -269,14 +313,14 @@ anova_modestly_tidy <- tidy(anova_modestly) %>%
 # Format and print the table in APA style
 anova_modestly_tidy %>%
   kbl(
-    caption = "Table 3. One-Way ANOVA for Modestly Costly Retaliation",
     booktabs = TRUE
   ) %>%
   kable_classic(full_width = FALSE, html_font = "Times New Roman")
 ```
 
 ```{r}
-#| label: anova-strongly-table
+#| label: tbl-anova-strongly-table
+#| tbl-cap: "One-Way ANOVA for Stongly Costly Retaliation"
 #| echo: false
 # Tidy the ANOVA result for Strongly Costly Retaliation
 anova_strongly_tidy <- tidy(anova_strongly) %>%
@@ -298,7 +342,6 @@ anova_strongly_tidy <- tidy(anova_strongly) %>%
 # Format and print the table in APA style
 anova_strongly_tidy %>%
   kbl(
-    caption = "Table 4. One-Way ANOVA for Strongly Costly Retaliation",
     booktabs = TRUE
   ) %>%
   kable_classic(full_width = FALSE, html_font = "Times New Roman") %>%
@@ -309,14 +352,11 @@ anova_strongly_tidy %>%
   )
 ```
 
-Temperature condition does not affect modestly costly retaliation.
-p = 0.00136 (< 0.01) → Statistically significant
-F = 6.905 → The effect size is moderate to strong.
-Conclusion: Temperature condition significantly affects Strongly Costly Retaliation.
-Tukey HSD Results for Strongly Costly Retaliation:
-HOT vs. CTRL: p = 0.0056 → HOT has significantly more costly retaliation than CTRL.
-HOT vs. MID: p = 0.0037 → HOT has significantly more costly retaliation than MID.
-MID vs. CTRL: p = 0.9907 → No significant difference.
+### ANOVA Results
+
+@fig-costly-retaliation-facet presents the retaliation rates across temperature conditions, separated by retaliation type (Advantageous, Modestly Costly, and Strongly Costly). The visualization suggests that participants in the HOT condition exhibit a higher proportion of strongly costly retaliation compared to those in the CTRL and MID conditions. In contrast, retaliation classified as modestly costly appeared to be more evenly distributed across temperature conditions, suggesting a less pronounced effect of heat stress in this category. The error bars, reflecting 95% confidence intervals, indicate greater variability in strongly costly retaliation under high-temperature exposure.
+
+Separate one-way ANOVAs were conducted to examine the effects of temperature condition on costly retaliation measures and to statistically evaluate these observations. The analysis for modestly costly retaliation (See @tbl-anova-modestly-table) did not reveal a significant main effect of temperature condition, F = 0.196, *p* = 0.823, suggesting that exposure to elevated temperatures did not significantly influence engagement in modestly costly retaliation. In contrast, the ANOVA for strongly costly retaliation (See @tbl-anova-strongly-table) yielded a statistically significant effect of temperature condition, F = 6.905, *p* = 0.001, indicating that higher temperatures significantly increased the likelihood of engaging in strongly costly retaliation. Overall, the results indicate that exposure to extreme heat significantly increases engagement in strongly costly retaliation, whereas modestly costly retaliation remains unaffected by temperature variations. The lack of significant differences between the MID and CTRL conditions suggests that moderate increases in temperature do not elicit the same elevation in aggression as higher heat exposure. Future research should explore potential mediating mechanisms, such as body temperature, heart rate variability, or cognitive control, to further explore the relationship between thermal stress and aggressive decision-making.
 
 ```{r}
 #| label: logistic-mixed-model
@@ -380,9 +420,9 @@ logit_results_named <- logit_results_cleaned %>%
   )
 ```
 
-
 ```{r}
-#| label: apa-logit-table
+#| label: tbl-logit-table
+#| tbl-cap: "Logistic Mixed Model Fixed Effects Estimates"
 #| echo: false
 # Build and format the table
 logit_results_named %>%
@@ -397,7 +437,6 @@ logit_results_named %>%
   dplyr::select(Predictor, B, Std_Error, CI, z_value, p_value) %>%
   # Build the table
   kbl(
-    caption = "Table 5. Logistic Mixed Model Fixed Effects Estimates",
     booktabs = TRUE
    ) %>%
   kable_classic(full_width = FALSE, html_font = "Times New Roman") %>%
@@ -410,7 +449,14 @@ logit_results_named %>%
   column_spec(1, bold = TRUE)
 
 ```
-Heat stress matters: Specifically, being in the HOT condition significantly increases the likelihood of strongly costly retaliation compared to the control condition.
+
+### Logistic Mixed-Effects Modeling
+
+A logistic mixed-effects model was conducted to examine the effects of temperature condition, trait impulsivity (BIS), and trait aggression (BPAQ) on the likelihood of engaging in strongly costly retaliation. The model included temperature condition, BIS, and BPAQ as fixed effects, with a random intercept for participant ID to account for repeated measures. The results are presented in @tbl-logit-table. The analysis revealed that participants in the HOT condition exhibited a significantly higher likelihood of engaging in strongly costly retaliation compared to those in the CTRL condition, B = `r round(logit_results_named$B[logit_results_named$Predictor == "Temperature (HOT vs. CTRL)"], 3)`, SE = `r round(logit_results_named$Std_Error[logit_results_named$Predictor == "Temperature (HOT vs. CTRL)"], 3)`, z = `r round(logit_results_named$z_value[logit_results_named$Predictor == "Temperature (HOT vs. CTRL)"], 3)`, *p* = `r format.pval(logit_results_named$p_value[logit_results_named$Predictor == "Temperature (HOT vs. CTRL)"], digits = 3, eps = 0.001)`. The 95% confidence interval (CI) for this effect ranged from `r round(logit_results_named$CI_Lower[logit_results_named$Predictor == "Temperature (HOT vs. CTRL)"], 3)` to `r round(logit_results_named$CI_Upper[logit_results_named$Predictor == "Temperature (HOT vs. CTRL)"], 3)`, suggesting a robust effect of high-temperature exposure on retaliatory aggression. This finding is consistent with the previous results from one-way ANOVA. In contrast, no significant difference was observed between the MID and CTRL conditions, *p* = `r format.pval(logit_results_named$p_value[logit_results_named$Predictor == "Temperature (MID vs. CTRL)"], digits = 3, eps = 0.001)`, indicating that moderate heat stress did not significantly alter retaliatory behavior. This suggests a threshold effect, where only extreme heat exposure substantially increases aggressive responses.
+
+Trait aggression (BPAQ) was also a significant predictor of strongly costly retaliation, B = `r round(logit_results_named$B[logit_results_named$Predictor == "Trait Aggression (BPAQ)"], 3)`, *p* = `r format.pval(logit_results_named$p_value[logit_results_named$Predictor == "Trait Aggression (BPAQ)"], digits = 3, eps = 0.001)`, indicating that individuals higher in trait aggression were more likely to retaliate under costly conditions. The 95% CI for this effect ranged from `r round(logit_results_named$CI_Lower[logit_results_named$Predictor == "Trait Aggression (BPAQ)"], 3)` to `r round(logit_results_named$CI_Upper[logit_results_named$Predictor == "Trait Aggression (BPAQ)"], 3)`, suggesting that aggression-related personality traits play a meaningful role in shaping retaliatory decisions. However, trait impulsivity (BIS) did not exhibit a significant main effect, *p* = `r format.pval(logit_results_named$p_value[logit_results_named$Predictor == "Trait Impulsivity (BIS)"], digits = 3, eps = 0.001)`, suggesting that impulsivity alone was not a strong predictor of costly retaliation in the current model. This finding contrasts with previous literature linking impulsivity to heightened aggression, raising the possibility that impulsivity's influence on retaliation may depend on specific contextual or interactive factors, such as emotional state or provocation intensity.
+
+These findings highlight the complex interplay between environmental stressors and individual traits in predicting retaliatory aggression. While extreme heat exposure independently heightened aggression, its effects were amplified among individuals high in trait aggression. Future research should explore potential underlying mechanisms, such as physiological arousal, self-regulation deficits, or emotional dysregulation, to further elucidate the pathways linking heat exposure to aggressive decision-making.
 
 ```{r}
 #| label: model2-moderation
@@ -492,9 +538,15 @@ summary(logit_model_combined)
 
 ```
 
+#### Moderation Analyses
+
+The moderation analysis tested whether trait impulsivity (BIS) and trait aggression (BPAQ) moderated the relationship between temperature condition and strongly costly retaliation. However, as this analysis was conducted on simulated data, the model fit was relatively low (AIC = `r round(AIC(logit_model_moderation), 1)`, BIC = `r round(BIC(logit_model_moderation), 1)`), limiting the reliability of these results. The model estimates suggest that trait aggression (BPAQ) approached significance (B = `r round(logit_results_named$B[logit_results_named$Predictor == "Trait Aggression (BPAQ)"], 3)`, p = `r format.pval(logit_results_named$p_value[logit_results_named$Predictor == "Trait Aggression (BPAQ)"], digits = 3, eps = 0.001)`), suggesting a potential negative relationship. However, the confidence interval (`r logit_results_named$CI[logit_results_named$Predictor == "Trait Aggression (BPAQ)"]`) likely includes zero, which is opposite to theoretical expectations, making it difficult to draw meaningful conclusions.
+
+Given these limitations, no additional visualizations or in-depth interpretations were included for this model. Instead, subsequent analyses focus on breaking down impulsivity and aggression into subcomponents to better understand potential nuanced interactions, as well as investigating negative affect (PANASNA) as a possible mediating variable in the heat-aggression relationship.
+
 ```{r}
 #| label: fig-scatter-panasna
-#| fig-cap: "Figure 2. Relationship Between Negative Affect and Temperatur"
+#| fig-cap: "Relationship Between Negative Affect and Temperatur"
 #| echo: false
 
 ggplot(heat_stress_data, aes(x = PANASNA_Mean, y = StronglyCostly, color = temperature_condition)) +
@@ -513,12 +565,27 @@ ggplot(heat_stress_data, aes(x = PANASNA_Mean, y = StronglyCostly, color = tempe
   )
 ```
 
+### Relationship Between Negative Affect and Aggression
 
+A further exploratory visualization serves as a preliminary step for a mediation analysis investigating whether heat stress increases negative affect and whether negative affect mediates the relationship between temperature and aggression. Understanding this relationship is crucial in determining whether heightened emotional distress is a key driver of heat-induced aggression rather than direct physiological or cognitive changes.
 
+@fig-scatter-panasna presents a scatterplot depicting the relationship between mean negative affect (PANASNA) and strongly costly retaliation, stratified by temperature condition. The observed patterns indicate potential temperature-dependent associations between negative affect and aggression.
 
+In the HOT condition, a negative association is observed, suggesting that participants with higher negative affect exhibited reduced strongly costly retaliation. This unexpected trend challenges the assumption that heightened negative emotions under heat stress universally lead to more aggression, possibly indicating emotion regulation mechanisms or individual variability in coping strategies under extreme stress. However, it is important to note that in the current simulated dataset, PANAS negative affect scores were randomly generated, meaning the observed pattern may not reflect a true psychological effect. Future analyses using real datasets will follow this same data analysis pipeline to assess the actual impact of heat exposure on affective states and aggression. In contrast, the MID and CTRL conditions show a positive association between negative affect and aggression. 
 
-## Results {#sec-methods}
+These preliminary findings imply the complex interplay between affective states and aggressive behavior under varying temperature conditions. Given the mixed directional effects, further investigation is warranted to determine whether negative affect mediates the relationship between heat stress and aggression.
 
-## Discussion {#sec-methods}
+## Discussion
 
+The present study examined the relationship between heat stress and reactive aggression, with a particular focus on the moderating role of individual differences in impulsivity and aggression and the potential mediating role of negative affect. Using a simulated dataset, the analyses followed a systematic approach to assess the effects of temperature on costly retaliation, the interaction between personality traits and heat exposure, and the role of negative affect in shaping aggressive responses. In line with the Temperature-Aggression Hypothesis [@andersonTemperatureAggression2000], current findings indicate that exposure to high temperatures significantly increases the likelihood of engaging in aggressive behavior. Specifically, participants in the HOT condition retaliated more vigorously compared to their counterparts in the room temperature and moderately heated (MID) conditions.
 
+While the current study provides a systematic framework for analyzing heat stress and aggression, several limitations must be acknowledged. First, the use of a simulated dataset prevents any definitive conclusions regarding the real-world psychological effects of temperature on aggression. The results, particularly those related to negative affect and trait moderation effects, are likely artifacts of the simulated data structure rather than reflections of true psychological processes. Additionally, the low model fit and singular variance estimates in the mixed-effects models indicate that future studies should incorporate larger sample sizes and more diverse trait distributions to enhance the robustness of statistical conclusions.
+
+This study established a data analysis pipeline for investigating the effects of heat stress on aggression, integrating moderation and mediation analyses to examine the role of personality traits and negative affect. Although the current findings are constrained by the limitations of simulated data, the framework provides a strong foundation for future empirical investigations. The results underscore the importance of considering both situational and dispositional factors in understanding aggression under heat stress and highlight the need for further research using real-world data to clarify these complex interactions
+
+\clearpage
+
+## References
+
+::: {#refs}
+:::
