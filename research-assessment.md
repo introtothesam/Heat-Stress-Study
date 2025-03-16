@@ -100,7 +100,7 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     3.  Does not have duplicate/redundant elements
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [x] Objective met
         -   Grader comments:
 
@@ -110,7 +110,7 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     2.  Outlines the repo structure with file tree or similar
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [x] Objective met
         -   Grader comments:
 
@@ -120,9 +120,9 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     2.  .gitingore comprehensively excludes unnecessary, private, and very large files and are commented appropriately
 
-        -   [ ] Objective attempt
-        -   [x] Objective met
-        -   Grader comments:
+        -   [x] Objective attempt
+        -   [ ] Objective met
+        -   Grader comments: .gitignore should not ignore any files required to render the project. In this case, the `apaquarto` package is ignored, which is probably the most important thing required to render the project!
 
 4.  effectively use version control
 
@@ -130,7 +130,7 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     2.  Relies on document revisions rather than manually created new versions
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [x] Objective met
         -   Grader comments:
 
@@ -145,9 +145,10 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     2.  Uses more than one function to install/load/require packages (including those used in commented code)
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [x] Objective met
         -   Grader comments: See `data_simulation.R` line 3-4
+            - great use of source scripts
 
 6.  Use arithmetic, comparison, and logical operators
 
@@ -155,7 +156,7 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     2.  Uses multiple operators in data transformation pipelines and/or inline R code
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [x] Objective met
             -   Grader comments: See `data_simulation.R` and `data_transformation.R`
 
@@ -167,7 +168,7 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     3.  Functions are well-documented with comments
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [x] Objective met
         -   Grader comments: See `data_simulation.R` line 153-169, `data_transformation.R` line 77-81, line 117-119
 
@@ -177,7 +178,7 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     2.  Uses multiple types of conditional/loop functions (e.g., `if_else()`, `case_when()`, `for`, `while`)
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [x] Objective met
         -   Grader comments: See `data_simulation.R` line 159-176 and `data_transformation.R`
 
@@ -189,9 +190,9 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     3.  Uses only relative paths that run without error when repo is cloned
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [x] Objective met
-        -   Grader comments:
+        -   Grader comments: 
 
 10. Use `dplyr` and `tidyr` functions to transform data (merge)
 
@@ -201,7 +202,7 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     3.  Combines `dplyr` and `tidyr` functions in a data transformation pipeline
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [x] Objective met
         -   Grader comments: See `data_transformation.R` `dplyer`: `mutate()`, `rename()`, `left_join()`...; `tidyr`: `pivot_wider()`
 
@@ -211,9 +212,10 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     2.  Uses `stringr` functions in a data transformation pipeline
 
-        -   [ ] Objective attempt
-        -   [x] Objective met
+        -   [x] Objective attempt
+        -   [ ] Objective met
         -   Grader comments: See `data_transformation.R` `rename()`, `str_detect()`
+            - only 1 stringr function used (rename is not stringr)
 
 12. Use `forcats` functions to work with factor variables
 
@@ -222,7 +224,7 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     -   NOTE: Though they are base R functions, `factor()` and `levels()` can be used to meet this objective as long as they are used in a way that demonstrates the same skills as `forcats` functions, which should involve including optional arguments
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [x] Objective met
         -   Grader comments: `factor()` `fct_rev()` `fct_relevel()`
 
@@ -234,7 +236,7 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     2.  At least one plot is multi-variable
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [x] Objective met
         -   Grader comments:
 
@@ -242,7 +244,7 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     1.  Uses at least 2 unique data-mapped `aes()` arguments (e.g., color, shape, size) to group data in a plot in one or multiple plots
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [x] Objective met
         -   Grader comments:
 
@@ -254,7 +256,7 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
     4.  Combines facets with other dynamic grouping aesthetics
     5.  If data only includes 1 sensible grouping variable, it may be used for both the faceting and groupin aes.
 
-    -   [ ] Objective attempt
+    -   [x] Objective attempt
     -   [x] Objective met
     -   Grader comments:
 
@@ -268,9 +270,10 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     4.  Uses at least 1 static aesthetic (e.g., color, shape, size) that improves visual clarity without mapping to data
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [x] Objective met
         -   Grader comments:
+
 
 ### Data analysis
 
@@ -282,7 +285,7 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     -   NOTE: This objective may be met with only numeric or non-numeric summaries if they are sufficiently complex (at Dr. Dowling's discretion)
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [x] Objective met
         -   Grader comments:
 
@@ -294,7 +297,7 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     -   NOTE: This objective may be met with only numeric or factor data analyses if they are sufficiently complex (at Dr. Dowling's discretion)
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [x] Objective met
         -   Grader comments:
 
@@ -308,7 +311,7 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     4.  Uses dynamic inline R code to render data-dependent text
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [x] Objective met
         -   Grader comments:
 
@@ -322,7 +325,7 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     3.  May use `cite_r()` to cite R and R packages
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [x] Objective met
         -   Grader comments:
 
@@ -338,9 +341,10 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     5.  May include references not cited in-text
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [x] Objective met
         -   Grader comments:
+            - "References" should be heading 1 (centered)
 
 ### Notebooks and code chunks
 
@@ -354,9 +358,9 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     4.  Chunks are distributed throughout the manuscript, sensibly placed near the text they support
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [x] Objective met
-        -   Grader comments:
+        -   Grader comments: 
 
 23. Use code chunks to set up a quarto document
 
@@ -368,9 +372,9 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     4.  Organizes setup chunks sensibly
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [x] Objective met
-        -   Grader comments:
+        -   Grader comments: good use of sourced scripts in place of very long code chunks
 
 24. Render publication-quality tables, figures, and images from code chunks
 
@@ -382,9 +386,11 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     -   NOTE: Ideally your table(s) should be produced in APA7 style, but this is not a strict requirement. At a minimum, they should render as formatted tables (not raw output), have readable and correctly formatted text (e.g., column headers should be capitalized and in plain english, not literal variable names), and the table must be dynamically referenced in the text.
 
-        -   [ ] Objective attempt
-        -   [x] Objective met
+        -   [x] Objective attempt
+        -   [ ] Objective met
         -   Grader comments:
+            - Duplicates titles (only use fig-cap, not the ggplot title lab)
+            - Tables contain text not in plain English / apa expected form (e.g., temperature_condition, Std_Error should be SE, z_value and p_value should be *z*-value and *p*-value)
 
 25. Execute descriptive and inferential analyses in code chunks
 
@@ -398,7 +404,7 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     5.  Chunks are organized sensibly and appear near the text they support
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [x] Objective met
         -   Grader comments:
 
@@ -408,9 +414,9 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     1.  Includes all necessary metadata, output options, and formatting options necessary to render an APA styled document (or other specified style if appropriate for the project)
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [x] Objective met
-        -   Grader comments:
+        -   Grader comments: missing floatsintext
 
 27. Use quarto R Markdown to compose an academic manuscript
 
@@ -421,9 +427,12 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     -   NOTE: This is going to be one of the most flexible objectives to demonstrate. You need to demonstrate a range of markdown skills and use them to make a readable, informative manuscript. Hitting the four points above should do that, but you can use your judgment about what kind of markdown features will best serve your project. No matter what, you should use markdown to follow APA7 guidelines.
 
-        -   [ ] Objective attempt
-        -   [x] Objective met
+        -   [x] Objective attempt
+        -   [ ] Objective met
         -   Grader comments:
+            - 1 text style used
+            - 1 markdown element (list)
+            - incorrect heading levels for APA
 
 28. Use inline R variables to replace static text
 
@@ -433,7 +442,7 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     3.  Ideally, uses inline R references for *all* data-dependent text
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [x] Objective met
         -   Grader comments:
 
@@ -441,7 +450,7 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     1.  Uses inline R functions to render at least 3 unique data-dependent text outputs (e.g., performs rounding, calculates means, subtracts one list length from another, etc. -- inline rather than in a code chunk)
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [x] Objective met
         -   Grader comments:
 
@@ -455,9 +464,15 @@ Refer to the website for general tips on meeting these objectives and an FAQ.
 
     4.  No additional steps are needed (e.g., finding data, determining necessary packages to install and load, running unsourced scripts, correcting aboslute paths)
 
-        -   [ ] Objective attempt
-        -   [x] Objective met
+        -   [x] Objective attempt
+        -   [ ] Objective met
         -   Grader comments:
+            - See comment below about apaquarto -- this is only affecting 2 points (this one and #3) since I don't want to penalize you for literally everything that involves rendering
+            - Incorrect heading levels
+            - "Introduction" should not exist; title then text
+            - Figures not displayed in text (floatsintext:true)
+            
+
 
 ## Reflection (Optional)
 
@@ -513,8 +528,20 @@ I maintain my repo frequent, well-documented commits, use a `.gitignore` file to
 
 All final projects are graded by Dr. Dowling. You will see your grade on Canvas separated into two categories: objective points and engagement points.
 
--   **Objective points:** #/30
--   **Engagement points:** #/10
--   **Total points:** #/40
+-   **Objective points:** 25/30
+-   **Engagement points:** 0/10 -- see note below
+-   **Total points:** 25/40
 
 **Comments:**
+
+Chenyi, you have clearly put a lot of effort into this project and have demonstrated a strong understanding of the course material. I recognize a lot of real strengths here. Yur analyses are sophisticated, your sourced scripts are very effective, and you've fully committed to dynamic text and inline r code. That said, there are two major issues that are affecting your grade.
+
+The first issue is that apaquarto is not installed in this repo because you have included in your .gitignore. I have installed it on my local machine to render your project. I can tell that you have it installed and it does render as expected once I install it locally, so I am not docking you points for every time this would lead to failure to demonstrate objectives. Please remember that if you use this workflow in the future, you should prioritize repo organization and reproducibility. 
+
+A bigger concern is your use of AI for text. Although you are welcome to use AI for generating code, the course policy explicitly prohibits use of LLMs or other AI to generate any text, including text for your reflections. It is evident that you have used AI for generating text in your reflection. Much of the text is rewording of my own language from the assignment and assessment document. The text also says that you did things you did not actually do, like creating markdown footnotes and creating tables with apaTables.
+
+I will not accuse you of using AI to generate text of the manuscript itself, but I caution you that if you have done so you need to rewrite the narrative text if you intend to take this project further, like submitting it to a journal or as a thesis. You should know that LLMs have a very distinct style that is recognizable to people who have read a lot of text generated by them. I do not have strong evidence to suggest you have done this, but I want to make it very clear to you that just because I am choosing not to further analyze your manuscript's text for AI use does not mean no one else will.
+
+I have given you a 0 for engagement due to violation of the AI policy. However, I do recognize that you have worked very hard on this project and want to give you the benefit of the doubt. I would like to believe that this was an error in judgment or misunderstanding of the policy. I am willing to give you the opportunity to rewrite and resubmit this reflection without the use of AI. You should also update your AI statement to explain in full how you used AI originally and how you have corrected this for the resubmission.
+
+If you do so, I will award you up to 5 points for engagement. If you choose to do this, make the changes directly in this document, commit and push to github, then email me to let me know. I will review and update your grade accordingly. The deadline for submitting grades to the registrar is March 18th, so I need to receive your resubmission by that morning at the latest. If I haven't gotten anything from you by the time I submit grades for all students, I will submit your grade as is.
