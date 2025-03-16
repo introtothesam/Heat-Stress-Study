@@ -51,6 +51,4 @@ rsconnect/
 # Ignore local files (reference data)
 localonly/
 
-# Ignore apaquarto extension (avoid reinstalling)
-_extensions/
 
