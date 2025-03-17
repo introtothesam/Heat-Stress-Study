@@ -1,0 +1,118 @@
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
+{\caption{{Descriptive Statistics for Key
+Variables}{\label{tbl-descriptive-stats}}}
+\vspace{-20pt}}
+
+\centering
+\begin{tabular}[t]{l|r|r}
+\hline
+Variable & Mean & SD\\
+\hline
+Costly Retaliation & 0.99 & 0.64\\
+\hline
+Negative Affect (PANASNA) & 20.75 & 2.06\\
+\hline
+Novaco Anger & 18.10 & 3.43\\
+\hline
+Trait Aggression (BPAQ) & 175.72 & 16.02\\
+\hline
+Trait Impulsivity (BIS) & 151.36 & 10.42\\
+\hline
+\end{tabular}
+
+\end{table*}
+\efloatseparator
+ 
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
+{\caption{{Descriptive Statistics for Gender
+Distrivution}{\label{tbl-gender-distribution}}}
+\vspace{-20pt}}
+
+\centering
+\begin{tabular}[t]{l|r|r}
+\hline
+gender & Count & Proportion\\
+\hline
+Female & 36 & 0.72\\
+\hline
+Male & 14 & 0.28\\
+\hline
+\end{tabular}
+
+\end{table*}
+\efloatseparator
+ 
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
+{\caption{{One-Way ANOVA for Modestly Costly
+Retaliation}{\label{tbl-anova-modestly-table}}}
+\vspace{-20pt}}
+
+\centering
+\begin{tabular}[t]{lrrrll}
+\toprule
+Source & df & Sum of Squares & Mean Square & F & p\\
+\midrule
+temperature\_condition & 2 & 0.092 & 0.046 & 0.196 & 0.823\\
+Error & 147 & 34.398 & 0.234 & -- & --\\
+\bottomrule
+\end{tabular}
+
+\end{table*}
+\efloatseparator
+ 
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
+{\caption{{One-Way ANOVA for Stongly Costly
+Retaliation}{\label{tbl-anova-strongly-table}}}
+\vspace{-20pt}}
+
+\centering\centering
+\resizebox{\ifdim\width>\linewidth\linewidth\else\width\fi}{!}{
+\begin{tabular}[t]{lrrrll}
+\toprule
+Source & df & Sum of Squares & Mean Square & F & p\\
+\midrule
+temperature\_condition & 2 & 2.941 & 1.470 & 6.905 & 0.001\\
+Error & 147 & 31.300 & 0.213 & -- & --\\
+\bottomrule
+\multicolumn{6}{l}{\rule{0pt}{1em}Note. Df = degrees of freedom; SS = sum of squares; MS = mean square. F and p are not computed for the Error row.}\\
+\end{tabular}}
+
+\end{table*}
+\efloatseparator
+ 
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
+{\caption{{Logistic Mixed Model Fixed Effects
+Estimates}{\label{tbl-logit-table}}}
+\vspace{-20pt}}
+
+\centering
+\begin{tabular}[t]{>{}lrrlrl}
+\toprule
+Predictor & B & Std\_Error & CI & z\_value & p\_value\\
+\midrule
+\textbf{Intercept} & 0.484 & 3.432 & {}[-6.243, 7.21] & 0.141 & 0.888\\
+\textbf{Temperature (MID vs. CTRL)} & -0.064 & 0.463 & {}[-0.973, 0.844] & -0.139 & 0.889\\
+\textbf{Temperature (HOT vs. CTRL)} & 1.297 & 0.439 & {}[0.437, 2.158] & 2.954 & 0.003\\
+\textbf{Trait Impulsivity (BIS)} & 0.019 & 0.018 & {}[-0.016, 0.054] & 1.042 & 0.297\\
+\textbf{Trait Aggression (BPAQ)} & -0.025 & 0.012 & {}[-0.047, -0.002] & -2.146 & 0.032\\
+\bottomrule
+\multicolumn{6}{l}{\rule{0pt}{1em}\textit{Model 1: Temperature, Impulsivity, and Aggression as Predictors of Strongly Costly Retaliation}}\\
+\multicolumn{6}{l}{\rule{0pt}{1em}Note. B = logit coefficient, SE = standard error, z = test statistic, p = p-value, 95\% CI in brackets.}\\
+\end{tabular}
+
+\end{table*}

@@ -1,0 +1,30 @@
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
+\caption{\label{fig-costly-retaliation-facet}Retaliation Rates Across
+Temperature Conditions}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{manuscript_files/figure-pdf/fig-costly-retaliation-facet-1.pdf}}
+
+}
+
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
+\caption{\label{fig-scatter-panasna}Relationship Between Negative Affect
+and Temperatur}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{manuscript_files/figure-pdf/fig-scatter-panasna-1.pdf}}
+
+}
+
+\end{figure*}
